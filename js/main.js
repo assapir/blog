@@ -247,18 +247,18 @@ class App {
     console.log(`
     ╔══════════════════════════════════════════════════════════════╗
     ║                                                              ║
-    ║    👋 Hello there, fellow developer!                        ║
+    ║    👋 Hello there, fellow developer!                         ║
     ║                                                              ║
-    ║    Welcome to Assaf Sapir's personal website.               ║
-    ║    Built with vanilla JavaScript and Web Components.        ║
+    ║    Welcome to Assaf Sapir's personal website.                ║
+    ║    Built with vanilla JavaScript and Web Components.         ║
     ║                                                              ║
-    ║    🚀 Modern, accessible, and performance-focused           ║
-    ║    🎨 Clean design with CSS Grid and Flexbox                ║
-    ║    📱 Fully responsive and mobile-friendly                  ║
-    ║    ⚡ Progressive enhancement and SEO optimized              ║
+    ║    🚀 Modern, accessible, and performance-focused            ║
+    ║    🎨 Clean design with CSS Grid and Flexbox                 ║
+    ║    📱 Fully responsive and mobile-friendly                   ║
+    ║    ⚡ Progressive enhancement and SEO optimized               ║
     ║                                                              ║
-    ║    Interested in the code? Check it out on GitHub:          ║
-    ║    https://github.com/assapir                               ║
+    ║    Interested in the code? Check it out on GitHub:           ║
+    ║    https://github.com/assapir                                ║
     ║                                                              ║
     ║    Let's connect and build something amazing together! 🤝    ║
     ║                                                              ║

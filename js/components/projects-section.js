@@ -1,11 +1,16 @@
+import githubApi from "../services/github-api.js";
+
 class ProjectsSection extends HTMLElement {
   constructor() {
     super();
-    this.projects = this.getProjectsData();
+    this.projects = [];
+    this.loading = true;
+    this.error = null;
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     this.render();
+    await this.loadProjects();
     this.setupInteractions();
   }
 
@@ -18,9 +23,7 @@ class ProjectsSection extends HTMLElement {
                 </div>
 
                 <div class="projects-grid">
-                    ${this.projects
-                      .map((project) => this.createProjectCard(project))
-                      .join("")}
+                    ${this.renderContent()}
                 </div>
 
                 <div class="projects-footer">
@@ -34,6 +37,101 @@ class ProjectsSection extends HTMLElement {
 
     this.setAttribute("id", "projects");
     this.addStyles();
+  }
+
+  renderContent() {
+    if (this.loading) {
+      return this.renderLoadingSkeleton();
+    }
+
+    if (this.error) {
+      return this.renderError();
+    }
+
+    return this.projects
+      .map((project) => this.createProjectCard(project))
+      .join("");
+  }
+
+  renderLoadingSkeleton() {
+    return Array(6)
+      .fill(0)
+      .map(
+        (_, index) => `
+      <article class="project-card skeleton-card" data-skeleton="${index}">
+        <div class="project-header">
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-badge"></div>
+        </div>
+        <div class="skeleton skeleton-description"></div>
+        <div class="skeleton skeleton-description short"></div>
+        <div class="project-tech">
+          <div class="skeleton skeleton-tech"></div>
+          <div class="skeleton skeleton-tech"></div>
+          <div class="skeleton skeleton-tech"></div>
+        </div>
+        <div class="project-stats">
+          <div class="skeleton skeleton-stat"></div>
+          <div class="skeleton skeleton-stat"></div>
+          <div class="skeleton skeleton-stat"></div>
+        </div>
+        <div class="project-links">
+          <div class="skeleton skeleton-button"></div>
+          <div class="skeleton skeleton-button"></div>
+        </div>
+      </article>
+    `
+      )
+      .join("");
+  }
+
+  renderError() {
+    return `
+      <div class="error-state">
+        <div class="error-icon">⚠️</div>
+        <h3>Unable to load projects</h3>
+        <p>We couldn't fetch the latest project data from GitHub. Please try again.</p>
+        <button class="btn btn-primary retry-btn" onclick="this.parentElement.parentElement.parentElement.parentElement.querySelector('projects-section').retryLoad()">
+          Retry Loading
+        </button>
+      </div>
+    `;
+  }
+
+  async loadProjects() {
+    try {
+      console.log('🔄 Starting to load projects from GitHub API...');
+      this.loading = true;
+      this.error = null;
+      this.updateContent();
+
+      console.log('📡 Calling githubApi.getFeaturedRepositories...');
+      const repositories = await githubApi.getFeaturedRepositories(6);
+      console.log('✅ Received repositories:', repositories);
+      this.projects = repositories;
+
+      this.loading = false;
+      this.updateContent();
+
+      // Re-setup interactions after content loads
+      setTimeout(() => this.setupInteractions(), 100);
+    } catch (error) {
+      console.error('❌ Failed to load projects:', error);
+      this.loading = false;
+      this.error = error.message;
+      this.updateContent();
+    }
+  }
+
+  async retryLoad() {
+    await this.loadProjects();
+  }
+
+  updateContent() {
+    const projectsGrid = this.querySelector(".projects-grid");
+    if (projectsGrid) {
+      projectsGrid.innerHTML = this.renderContent();
+    }
   }
 
   createProjectCard(project) {
@@ -149,6 +247,103 @@ class ProjectsSection extends HTMLElement {
                 transform: translateY(0);
             }
 
+            /* Loading Skeleton Styles */
+            .skeleton-card {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            .skeleton {
+                background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+                background-size: 200% 100%;
+                animation: skeleton-loading 1.5s infinite;
+                border-radius: var(--border-radius-sm);
+            }
+
+            .skeleton-title {
+                height: 24px;
+                width: 70%;
+                margin-bottom: var(--space-sm);
+            }
+
+            .skeleton-badge {
+                height: 20px;
+                width: 60px;
+            }
+
+            .skeleton-description {
+                height: 16px;
+                margin-bottom: var(--space-sm);
+                width: 100%;
+            }
+
+            .skeleton-description.short {
+                width: 80%;
+            }
+
+            .skeleton-tech {
+                height: 24px;
+                width: 60px;
+                margin-right: var(--space-sm);
+                margin-bottom: var(--space-sm);
+                display: inline-block;
+            }
+
+            .skeleton-stat {
+                height: 16px;
+                width: 50px;
+                margin-right: var(--space-md);
+            }
+
+            .skeleton-button {
+                height: 36px;
+                width: 80px;
+                margin-right: var(--space-sm);
+                display: inline-block;
+            }
+
+            @keyframes skeleton-loading {
+                0% {
+                    background-position: -200% 0;
+                }
+                100% {
+                    background-position: 200% 0;
+                }
+            }
+
+            /* Error State Styles */
+            .error-state {
+                grid-column: 1 / -1;
+                text-align: center;
+                padding: var(--space-4xl) var(--space-xl);
+                background-color: var(--background-secondary);
+                border-radius: var(--border-radius-lg);
+                border: 2px dashed var(--border-color);
+            }
+
+            .error-icon {
+                font-size: var(--font-size-4xl);
+                margin-bottom: var(--space-lg);
+            }
+
+            .error-state h3 {
+                color: var(--text-primary);
+                margin-bottom: var(--space-md);
+                font-size: var(--font-size-xl);
+            }
+
+            .error-state p {
+                color: var(--text-secondary);
+                margin-bottom: var(--space-xl);
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .retry-btn {
+                margin-top: var(--space-lg);
+            }
+
             @media (max-width: 768px) {
                 .project-header {
                     flex-direction: column;
@@ -199,95 +394,6 @@ class ProjectsSection extends HTMLElement {
         card.style.transform = "translateY(-8px) scale(1)";
       });
     });
-  }
-
-  getProjectsData() {
-    // Based on your GitHub profile, here are some featured projects
-    return [
-      {
-        id: "yahf",
-        name: "YAHF",
-        description:
-          "Yet Another HTTP Framework - A lightweight, modern HTTP framework that you don't really need, but might want anyway. Built with simplicity and performance in mind.",
-        technologies: ["JavaScript", "Node.js", "HTTP", "Express"],
-        language: "JavaScript",
-        stars: 2,
-        forks: 0,
-        status: "active",
-        github: "https://github.com/assapir/yahf",
-        demo: null,
-      },
-      {
-        id: "gpsd-ts",
-        name: "GPSD-TS",
-        description:
-          "TypeScript client library for communicating with GPSD (GPS Daemon). Provides type-safe GPS data access with modern async/await patterns.",
-        technologies: ["TypeScript", "GPS", "Node.js", "Networking"],
-        language: "TypeScript",
-        stars: 5,
-        forks: 1,
-        status: "maintained",
-        github: "https://github.com/assapir/gpsd-ts",
-        demo: null,
-      },
-      {
-        id: "hebcal-contributions",
-        name: "Hebcal Contributions",
-        description:
-          "Contributions to the Hebcal project - a comprehensive Hebrew calendar and Jewish holiday calculation library used by thousands of applications worldwide.",
-        technologies: [
-          "JavaScript",
-          "Calendar",
-          "Jewish Holidays",
-          "Open Source",
-        ],
-        language: "JavaScript",
-        stars: 120,
-        forks: 25,
-        status: "active",
-        github: "https://github.com/hebcal",
-        demo: "https://www.hebcal.com",
-      },
-      {
-        id: "web-components-portfolio",
-        name: "Modern Web Portfolio",
-        description:
-          "This very website! Built with vanilla JavaScript, modern CSS Grid, and Web Components. Showcases responsive design and progressive enhancement.",
-        technologies: ["HTML5", "CSS Grid", "Web Components", "Vanilla JS"],
-        language: "JavaScript",
-        stars: 0,
-        forks: 0,
-        status: "active",
-        github: null,
-        demo: null,
-      },
-      {
-        id: "open-source-tools",
-        name: "Development Tools",
-        description:
-          "Collection of utility tools and scripts for development workflow automation. Includes build tools, testing utilities, and deployment helpers.",
-        technologies: ["Shell", "Python", "DevOps", "Automation"],
-        language: "Shell",
-        stars: 8,
-        forks: 2,
-        status: "maintained",
-        github: "https://github.com/assapir",
-        demo: null,
-      },
-      {
-        id: "learning-projects",
-        name: "Learning & Experiments",
-        description:
-          "Experimental projects exploring new technologies, frameworks, and programming concepts. From AI/ML experiments to blockchain demos.",
-        technologies: ["Various", "Learning", "Experiments", "Prototypes"],
-        language: "Mixed",
-        stars: 15,
-        forks: 3,
-        status: "active",
-        github: "https://github.com/assapir",
-        demo: null,
-      },
-    ];
   }
 }
 
