@@ -413,13 +413,6 @@ class ContactSection extends HTMLElement {
         icon: "💼",
         url: "https://www.linkedin.com/in/assaf-sapir/",
       },
-      {
-        platform: "email",
-        label: "Email",
-        handle: "assaf@sapir.io",
-        icon: "📧",
-        url: "mailto:assaf@sapir.io",
-      },
     ];
   }
 }

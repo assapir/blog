@@ -311,27 +311,6 @@ a:focus {
   text-decoration: underline;
 }
 
-/* Skip Navigation Link for Accessibility */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
-  background: var(--primary-blue);
-  color: white;
-  padding: 8px;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 600;
-  z-index: 10000;
-  transition: top 0.2s ease;
-}
-
-.skip-link:focus {
-  top: 6px;
-  outline: 3px solid white;
-  outline-offset: 2px;
-}
-
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   :root {

@@ -124,44 +124,11 @@ class App {
   }
 
   setupAccessibility() {
-    // Add skip navigation link
-    this.addSkipNavigation();
-
     // Setup focus management
     this.setupFocusManagement();
 
     // Add keyboard navigation enhancements
     this.setupKeyboardNavigation();
-  }
-
-  addSkipNavigation() {
-    const skipNav = document.createElement("a");
-    skipNav.href = "#main";
-    skipNav.textContent = "Skip to main content";
-    skipNav.className = "skip-nav";
-
-    const style = document.createElement("style");
-    style.textContent = `
-            .skip-nav {
-                position: absolute;
-                top: -40px;
-                left: 6px;
-                background: var(--primary-blue);
-                color: white;
-                padding: 8px;
-                text-decoration: none;
-                border-radius: 4px;
-                z-index: 1000;
-                transition: top 0.3s;
-            }
-
-            .skip-nav:focus {
-                top: 6px;
-            }
-        `;
-
-    document.head.appendChild(style);
-    document.body.insertBefore(skipNav, document.body.firstChild);
   }
 
   setupFocusManagement() {
