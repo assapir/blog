@@ -13,23 +13,26 @@ A modern, responsive personal website built with vanilla JavaScript, Web Compone
 ## 📁 Project Structure
 
 ```
-├── index.html                 # Main HTML entry point
-├── js/
-│   ├── main.js               # Application initialization and core logic
-│   ├── components/           # Web Components
-│   │   ├── nav-header.js     # Navigation component
-│   │   ├── hero-section.js   # Hero section
-│   │   ├── about-section.js  # About section
-│   │   ├── projects-section.js # Dynamic projects from GitHub
-│   │   ├── skills-section.js # Skills showcase
-│   │   ├── contact-section.js # Contact information
-│   │   └── footer-component.js # Footer
-│   └── services/
-│       └── github-api.js     # GitHub API integration service
-├── styles/
-│   ├── main.css             # Core styles and CSS variables
-│   ├── components.css       # Component-specific styles
-│   └── responsive.css       # Media queries and responsive design
+├── package.json             # Project configuration and scripts
+├── wrangler.jsonc           # Cloudflare Workers configuration
+├── public/                  # Static website files
+│   ├── index.html           # Main HTML entry point
+│   ├── js/
+│   │   ├── main.js          # Application initialization and core logic
+│   │   ├── components/      # Web Components
+│   │   │   ├── nav-header.js     # Navigation component
+│   │   │   ├── hero-section.js   # Hero section
+│   │   │   ├── about-section.js  # About section
+│   │   │   ├── projects-section.js # Dynamic projects from GitHub
+│   │   │   ├── skills-section.js # Skills showcase
+│   │   │   ├── contact-section.js # Contact information
+│   │   │   └── footer-component.js # Footer
+│   │   └── services/
+│   │       └── github-api.js     # GitHub API integration service
+│   └── styles/
+│       ├── main.css         # Core styles and CSS variables
+│       ├── components.css   # Component-specific styles
+│       └── responsive.css   # Media queries and responsive design
 └── README.md
 ```
 
@@ -40,6 +43,7 @@ A modern, responsive personal website built with vanilla JavaScript, Web Compone
 - **Styling**: CSS Grid, Flexbox, CSS Custom Properties
 - **APIs**: GitHub REST API for dynamic project data
 - **Performance**: Intersection Observer, localStorage caching
+- **Deployment**: Cloudflare Workers
 
 ## 🔧 Setup & Development
 
@@ -54,19 +58,44 @@ A modern, responsive personal website built with vanilla JavaScript, Web Compone
 
    ```bash
    # Using Python 3
-   python -m http.server 8002
+   python -m http.server 8002 --directory public
 
-   # Using Node.js
-   npx serve -s . -l 8002
+   # Using Node.js (serve the public directory)
+   npx serve -s public -l 8002
 
    # Using PHP
-   php -S localhost:8002
+   cd public && php -S localhost:8002
+
+   # Using Cloudflare Workers (for development)
+   npx wrangler dev
    ```
 
 3. **Open in browser**:
    ```
    http://localhost:8002
    ```
+
+## 🚀 Deployment
+
+This project is configured for deployment on Cloudflare Workers:
+
+1. **Install Wrangler CLI**:
+   ```bash
+   # Using npx (no global installation needed)
+   npx wrangler login
+   ```
+
+2. **Deploy to Cloudflare Workers**:
+   ```bash
+   npx wrangler deploy
+   ```
+
+3. **Configure custom domain** (optional):
+   - Add your domain to Cloudflare
+   - Update nameservers at your domain registrar
+   - Configure custom domain in Workers dashboard
+
+The `wrangler.jsonc` file contains all deployment configuration.
 
 ## 🎯 Key Components
 
