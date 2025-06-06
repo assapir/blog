@@ -15,66 +15,34 @@ class ContactSection extends HTMLElement {
                         I'd love to hear from you!
                     </p>
 
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <span class="contact-icon">📧</span>
+                            <div class="contact-details">
+                                <span class="contact-label">Email</span>
+                                <a href="mailto:assaf@sapir.io" class="contact-value">assaf@sapir.io</a>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <span class="contact-icon">📍</span>
+                            <div class="contact-details">
+                                <span class="contact-label">Location</span>
+                                <span class="contact-value">Israel</span>
+                            </div>
+                        </div>
+                        <div class="contact-method">
+                            <span class="contact-icon">⏰</span>
+                            <div class="contact-details">
+                                <span class="contact-label">Response Time</span>
+                                <span class="contact-value">Usually within 24 hours</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="social-links">
                         ${this.getSocialLinks()
                           .map((link) => this.createSocialLink(link))
                           .join("")}
-                    </div>
-
-                    <div class="contact-form-container">
-                        <div class="contact-info">
-                            <h3>Get in Touch</h3>
-                            <div class="contact-methods">
-                                <div class="contact-method">
-                                    <span class="contact-icon">📧</span>
-                                    <div class="contact-details">
-                                        <span class="contact-label">Email</span>
-                                        <span class="contact-value">assaf@sapir.io</span>
-                                    </div>
-                                </div>
-                                <div class="contact-method">
-                                    <span class="contact-icon">📍</span>
-                                    <div class="contact-details">
-                                        <span class="contact-label">Location</span>
-                                        <span class="contact-value">Israel</span>
-                                    </div>
-                                </div>
-                                <div class="contact-method">
-                                    <span class="contact-icon">⏰</span>
-                                    <div class="contact-details">
-                                        <span class="contact-label">Response Time</span>
-                                        <span class="contact-value">Usually within 24 hours</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <form class="contact-form" id="contactForm">
-                            <div class="form-group">
-                                <label for="name">Name *</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="message">Message *</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                Send Message
-                                <span id="submitIcon">📤</span>
-                            </button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -97,132 +65,167 @@ class ContactSection extends HTMLElement {
   addStyles() {
     const style = document.createElement("style");
     style.textContent = `
-            .contact-form-container {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: var(--space-4xl);
-                margin-top: var(--space-4xl);
-                max-width: 1000px;
+            .contact-container {
+                max-width: 800px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .contact-container h2 {
+                font-size: var(--font-size-3xl);
+                font-weight: 700;
+                color: var(--text-primary);
+                margin-bottom: var(--space-lg);
+            }
+
+            .contact-container p {
+                font-size: var(--font-size-lg);
+                color: var(--text-secondary);
+                margin-bottom: var(--space-3xl);
+                max-width: 600px;
                 margin-left: auto;
                 margin-right: auto;
             }
 
-            .contact-info h3 {
-                font-size: var(--font-size-xl);
-                font-weight: 600;
-                color: var(--primary-dark);
-                margin-bottom: var(--space-lg);
-            }
-
             .contact-methods {
-                display: flex;
-                flex-direction: column;
-                gap: var(--space-lg);
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: var(--space-xl);
+                margin-bottom: var(--space-4xl);
             }
 
             .contact-method {
                 display: flex;
-                align-items: flex-start;
+                align-items: center;
                 gap: var(--space-md);
-                padding: var(--space-md);
+                padding: var(--space-xl);
                 background-color: var(--background-secondary);
-                border-radius: var(--border-radius);
+                border-radius: var(--border-radius-lg);
                 transition: all var(--transition-medium);
+                text-align: left;
             }
 
             .contact-method:hover {
                 background-color: var(--light-blue);
-                transform: translateX(4px);
+                transform: translateY(-4px);
+                box-shadow: var(--shadow-medium);
             }
 
             .contact-icon {
-                font-size: var(--font-size-xl);
+                font-size: var(--font-size-2xl);
                 flex-shrink: 0;
+                width: 60px;
+                height: 60px;
+                background-color: var(--primary-blue);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
             }
 
             .contact-details {
                 display: flex;
                 flex-direction: column;
+                gap: var(--space-xs);
             }
 
             .contact-label {
                 font-size: var(--font-size-sm);
                 color: var(--text-secondary);
                 font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
             }
 
             .contact-value {
                 font-weight: 600;
-                color: var(--primary-dark);
-            }
-
-            .contact-form {
-                background-color: var(--background-primary);
-                padding: var(--space-2xl);
-                border-radius: var(--border-radius-lg);
-                box-shadow: var(--shadow-medium);
-                border: 1px solid var(--border-color);
-            }
-
-            .form-group {
-                margin-bottom: var(--space-lg);
-            }
-
-            .form-group label {
-                display: block;
-                margin-bottom: var(--space-sm);
-                font-weight: 500;
                 color: var(--text-primary);
-            }
-
-            .form-group input,
-            .form-group textarea {
-                width: 100%;
-                padding: var(--space-md);
-                border: 2px solid var(--border-color);
-                border-radius: var(--border-radius-sm);
-                font-family: inherit;
                 font-size: var(--font-size-base);
-                transition: border-color var(--transition-fast);
-                background-color: var(--background-primary);
-                color: var(--text-primary);
             }
 
-            .form-group input:focus,
-            .form-group textarea:focus {
-                outline: none;
-                border-color: var(--primary-blue);
-                box-shadow: 0 0 0 3px rgba(22, 83, 126, 0.1);
+            .contact-value[href] {
+                color: var(--primary-blue);
+                text-decoration: none;
+                transition: color var(--transition-fast);
             }
 
-            .form-group textarea {
-                resize: vertical;
-                min-height: 120px;
+            .contact-value[href]:hover {
+                color: var(--accent-blue);
+                text-decoration: underline;
+            }
+
+            .social-links {
+                display: flex;
+                justify-content: center;
+                gap: var(--space-xl);
+                flex-wrap: wrap;
             }
 
             .social-link {
+                display: flex;
                 flex-direction: column;
+                align-items: center;
+                gap: var(--space-sm);
+                text-decoration: none;
+                color: var(--text-primary);
+                transition: all var(--transition-medium);
+                padding: var(--space-lg);
+                border-radius: var(--border-radius);
                 min-width: 120px;
+            }
+
+            .social-link:hover {
+                color: var(--primary-blue);
+                background-color: var(--background-secondary);
+                transform: translateY(-4px);
+            }
+
+            .social-icon {
+                width: 48px;
+                height: 48px;
+                background-color: var(--primary-blue);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: var(--font-size-xl);
+                color: white;
+                transition: background-color var(--transition-medium);
+            }
+
+            .social-link:hover .social-icon {
+                background-color: var(--accent-blue);
+            }
+
+            .social-label {
+                font-weight: 600;
+                font-size: var(--font-size-base);
             }
 
             .social-handle {
                 font-size: var(--font-size-sm);
-                color: var(--text-light);
+                color: var(--text-secondary);
                 font-weight: 400;
             }
 
             @media (max-width: 768px) {
-                .contact-form-container {
+                .contact-methods {
                     grid-template-columns: 1fr;
-                    gap: var(--space-2xl);
+                    gap: var(--space-lg);
                 }
 
-                .contact-form {
+                .contact-method {
                     padding: var(--space-lg);
                 }
 
                 .social-links {
-                    grid-template-columns: repeat(2, 1fr);
+                    gap: var(--space-md);
+                }
+
+                .social-link {
+                    min-width: 100px;
+                    padding: var(--space-md);
                 }
             }
         `;
@@ -230,32 +233,23 @@ class ContactSection extends HTMLElement {
   }
 
   setupInteractions() {
-    const form = this.querySelector("#contactForm");
-    const submitIcon = this.querySelector("#submitIcon");
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      this.handleFormSubmission(form, submitIcon);
-    });
-
-    // Add floating label effect
-    const inputs = this.querySelectorAll("input, textarea");
-    inputs.forEach((input) => {
-      input.addEventListener("focus", () => {
-        input.parentElement.classList.add("focused");
+    // Add hover effects for contact methods
+    const contactMethods = this.querySelectorAll(".contact-method");
+    contactMethods.forEach((method) => {
+      method.addEventListener("mouseenter", () => {
+        method.style.transform = "translateY(-4px) scale(1.02)";
       });
 
-      input.addEventListener("blur", () => {
-        if (!input.value) {
-          input.parentElement.classList.remove("focused");
-        }
+      method.addEventListener("mouseleave", () => {
+        method.style.transform = "translateY(-4px) scale(1)";
       });
     });
 
-    // Add real-time validation
-    inputs.forEach((input) => {
-      input.addEventListener("input", () => {
-        this.validateField(input);
+    // Add click tracking for analytics
+    const socialLinks = this.querySelectorAll(".social-link");
+    socialLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        console.log("Social link clicked:", link.dataset.platform);
       });
     });
   }

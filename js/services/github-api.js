@@ -171,8 +171,6 @@ class GitHubApiService {
     );
   }
 
-
-
   /**
    * Get cached repository data if still valid
    * @returns {Array|null} Cached repositories or null if expired/missing
@@ -260,8 +258,6 @@ class GitHubApiService {
       },
     ];
   }
-
-
 }
 
 // Export singleton instance

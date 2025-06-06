@@ -14,8 +14,8 @@
   --accent-blue: #0a3555;
   --light-blue: #e3f2fd;
   --text-primary: #1a1a1a; /* Darker for better contrast */
-  --text-secondary: #4a4a4a; /* Darker for better contrast */
-  --text-light: #6a6a6a; /* Darker for better contrast */
+  --text-secondary: #3a3a3a; /* Improved contrast from #4a4a4a */
+  --text-light: #555555; /* Improved contrast from #6a6a6a */
   --background-primary: #ffffff;
   --background-secondary: #f8f9fa;
   --border-color: #e0e0e0;

@@ -415,7 +415,7 @@ contact-section .social-link {
   align-items: center;
   gap: var(--space-sm);
   text-decoration: none;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   transition: all var(--transition-medium);
   padding: var(--space-lg);
   border-radius: var(--border-radius);
