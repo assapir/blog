@@ -100,14 +100,11 @@ class ProjectsSection extends HTMLElement {
 
   async loadProjects() {
     try {
-      console.log('🔄 Starting to load projects from GitHub API...');
       this.loading = true;
       this.error = null;
       this.updateContent();
 
-      console.log('📡 Calling githubApi.getFeaturedRepositories...');
       const repositories = await githubApi.getFeaturedRepositories(6);
-      console.log('✅ Received repositories:', repositories);
       this.projects = repositories;
 
       this.loading = false;
@@ -116,7 +113,6 @@ class ProjectsSection extends HTMLElement {
       // Re-setup interactions after content loads
       setTimeout(() => this.setupInteractions(), 100);
     } catch (error) {
-      console.error('❌ Failed to load projects:', error);
       this.loading = false;
       this.error = error.message;
       this.updateContent();

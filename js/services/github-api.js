@@ -29,7 +29,7 @@ class GitHubApiService {
     // Check cache first
     const cachedData = this.getCachedData();
     if (cachedData) {
-      return this.filterAndSortRepositories(cachedData, options);
+      return cachedData;
     }
 
     try {
@@ -55,7 +55,7 @@ class GitHubApiService {
       // Cache the results
       this.setCachedData(repositories);
 
-      return this.filterAndSortRepositories(repositories, options);
+      return repositories;
     } catch (error) {
       console.error("Failed to fetch GitHub repositories:", error);
       throw error;
@@ -152,6 +152,7 @@ class GitHubApiService {
       css3: "CSS3",
       html5: "HTML5",
       python: "Python",
+      rust: "Rust",
       docker: "Docker",
       postgresql: "PostgreSQL",
       mongodb: "MongoDB",
@@ -170,28 +171,7 @@ class GitHubApiService {
     );
   }
 
-  /**
-   * Filter and sort repositories based on options
-   * @param {Array} repositories - Array of repository objects
-   * @param {Object} options - Filter/sort options
-   * @returns {Array} Filtered and sorted repositories
-   */
-  filterAndSortRepositories(repositories, options = {}) {
-    let filtered = [...repositories];
 
-    // Apply additional filtering if needed
-    if (options.excludeForks) {
-      filtered = filtered.filter((repo) => !repo.fork);
-    }
-
-    if (options.minStars) {
-      filtered = filtered.filter(
-        (repo) => repo.stargazers_count >= options.minStars
-      );
-    }
-
-    return filtered;
-  }
 
   /**
    * Get cached repository data if still valid
@@ -281,28 +261,7 @@ class GitHubApiService {
     ];
   }
 
-  /**
-   * Clear cached data (useful for development/testing)
-   */
-  clearCache() {
-    localStorage.removeItem(this.cacheKey);
-  }
 
-  /**
-   * Get API rate limit status
-   * @returns {Promise<Object>} Rate limit information
-   */
-  async getRateLimitStatus() {
-    try {
-      const response = await fetch(`${this.baseUrl}/rate_limit`);
-      if (response.ok) {
-        return await response.json();
-      }
-    } catch (error) {
-      console.warn("Failed to check rate limit:", error);
-    }
-    return null;
-  }
 }
 
 // Export singleton instance
