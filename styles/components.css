@@ -383,62 +383,6 @@ contact-section {
   display: block;
 }
 
-contact-section .contact-container {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-contact-section h2 {
-  font-size: var(--font-size-3xl);
-  font-weight: 700;
-  color: var(--text-primary); /* Better contrast */
-  margin-bottom: var(--space-lg);
-}
-
-contact-section p {
-  font-size: var(--font-size-lg);
-  color: var(--text-secondary);
-  margin-bottom: var(--space-2xl);
-}
-
-contact-section .social-links {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-xl);
-  flex-wrap: wrap;
-}
-
-contact-section .social-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-sm);
-  text-decoration: none;
-  color: var(--text-primary);
-  transition: all var(--transition-medium);
-  padding: var(--space-lg);
-  border-radius: var(--border-radius);
-}
-
-contact-section .social-link:hover {
-  color: var(--primary-blue);
-  background-color: var(--background-secondary);
-  transform: translateY(-4px);
-}
-
-contact-section .social-icon {
-  width: 48px;
-  height: 48px;
-  background-color: var(--primary-blue);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-xl);
-  color: white;
-}
-
 /* Footer - Minimal styles, component handles its own styling */
 footer-component {
   display: block;
