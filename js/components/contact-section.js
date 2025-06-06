@@ -29,7 +29,7 @@ class ContactSection extends HTMLElement {
                                     <span class="contact-icon">📧</span>
                                     <div class="contact-details">
                                         <span class="contact-label">Email</span>
-                                        <span class="contact-value">hello@assafsapir.dev</span>
+                                        <span class="contact-value">assaf@sapir.io</span>
                                     </div>
                                 </div>
                                 <div class="contact-method">

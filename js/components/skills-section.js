@@ -24,17 +24,6 @@ class SkillsSection extends HTMLElement {
                       )
                       .join("")}
                 </div>
-
-                <div class="achievements-section">
-                    <h3>GitHub Achievements</h3>
-                    <div class="achievements-grid">
-                        ${this.getAchievements()
-                          .map((achievement) =>
-                            this.createAchievementBadge(achievement)
-                          )
-                          .join("")}
-                    </div>
-                </div>
             </div>
         `;
 
@@ -80,18 +69,6 @@ class SkillsSection extends HTMLElement {
         `;
   }
 
-  createAchievementBadge(achievement) {
-    return `
-            <div class="achievement-badge" title="${achievement.description}">
-                <div class="achievement-icon">${achievement.icon}</div>
-                <div class="achievement-info">
-                    <span class="achievement-name">${achievement.name}</span>
-                    <span class="achievement-desc">${achievement.short}</span>
-                </div>
-            </div>
-        `;
-  }
-
   addStyles() {
     const style = document.createElement("style");
     style.textContent = `
@@ -129,75 +106,6 @@ class SkillsSection extends HTMLElement {
                 padding: 2px var(--space-xs);
                 border-radius: var(--border-radius-sm);
                 margin-left: auto;
-            }
-
-            .achievements-section {
-                margin-top: var(--space-4xl);
-                text-align: center;
-            }
-
-            .achievements-section h3 {
-                font-size: var(--font-size-2xl);
-                font-weight: 600;
-                color: var(--text-primary);
-                margin-bottom: var(--space-2xl);
-            }
-
-            .achievements-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: var(--space-lg);
-                max-width: 800px;
-                margin: 0 auto;
-            }
-
-            .achievement-badge {
-                display: flex;
-                align-items: center;
-                gap: var(--space-md);
-                padding: var(--space-lg);
-                background-color: var(--background-primary);
-                border-radius: var(--border-radius);
-                box-shadow: var(--shadow-light);
-                transition: all var(--transition-medium);
-                cursor: pointer;
-            }
-
-            .achievement-badge:hover {
-                transform: translateY(-4px);
-                box-shadow: var(--shadow-medium);
-            }
-
-            .achievement-icon {
-                font-size: var(--font-size-2xl);
-                flex-shrink: 0;
-            }
-
-            .achievement-info {
-                display: flex;
-                flex-direction: column;
-                text-align: left;
-            }
-
-            .achievement-name {
-                font-weight: 600;
-                color: var(--text-primary);
-                font-size: var(--font-size-sm);
-            }
-
-            .achievement-desc {
-                font-size: var(--font-size-xs);
-                color: var(--text-secondary);
-            }
-
-            @media (max-width: 768px) {
-                .achievements-grid {
-                    grid-template-columns: 1fr;
-                }
-
-                .achievement-badge {
-                    padding: var(--space-md);
-                }
             }
         `;
     document.head.appendChild(style);
@@ -279,48 +187,6 @@ class SkillsSection extends HTMLElement {
         { name: "Testing", icon: "🧪", level: "Advanced" },
       ],
     };
-  }
-
-  getAchievements() {
-    return [
-      {
-        name: "Arctic Code Vault",
-        short: "Code preserved for 1000 years",
-        icon: "🏔️",
-        description:
-          "Contributed code to repositories stored in the GitHub Arctic Code Vault",
-      },
-      {
-        name: "Pull Shark x3",
-        short: "Opened many pull requests",
-        icon: "🦈",
-        description: "Opened multiple pull requests that were merged",
-      },
-      {
-        name: "YOLO",
-        short: "Merged without review",
-        icon: "🎯",
-        description: "Merged a pull request without review",
-      },
-      {
-        name: "Quickdraw",
-        short: "Fast issue closure",
-        icon: "⚡",
-        description: "Closed an issue within 5 minutes of opening",
-      },
-      {
-        name: "Pair Extraordinaire",
-        short: "Co-authored commits",
-        icon: "👥",
-        description: "Co-authored commits with multiple users",
-      },
-      {
-        name: "Public Sponsor",
-        short: "Sponsored open source",
-        icon: "💖",
-        description: "Sponsored open source projects",
-      },
-    ];
   }
 }
 
