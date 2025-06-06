@@ -7,7 +7,7 @@ class FooterComponent extends HTMLElement {
   render() {
     this.innerHTML = `
             <div class="footer-content">
-                <p>&copy; ${new Date().getFullYear()} Assaf Sapir. Built with ❤️ using vanilla JavaScript and Web Components.</p>
+                <p>&copy; ${new Date().getFullYear()} Assaf Sapir. Built with ❤️ using vanilla JavaScript, Web Components and vibe coding.</p>
                 <button class="back-to-top" id="backToTop" aria-label="Back to top">
                     ↑
                 </button>

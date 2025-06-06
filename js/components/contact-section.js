@@ -17,13 +17,6 @@ class ContactSection extends HTMLElement {
 
                     <div class="contact-methods">
                         <div class="contact-method">
-                            <span class="contact-icon">📧</span>
-                            <div class="contact-details">
-                                <span class="contact-label">Email</span>
-                                <a href="mailto:assaf@sapir.io" class="contact-value">assaf@sapir.io</a>
-                            </div>
-                        </div>
-                        <div class="contact-method">
                             <span class="contact-icon">📍</span>
                             <div class="contact-details">
                                 <span class="contact-label">Location</span>
@@ -53,9 +46,13 @@ class ContactSection extends HTMLElement {
   }
 
   createSocialLink(link) {
+    const iconContent = link.image
+      ? `<img src="${link.image}" alt="${link.label} icon" />`
+      : link.icon;
+
     return `
             <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="social-link" data-platform="${link.platform}">
-                <div class="social-icon">${link.icon}</div>
+                <div class="social-icon">${iconContent}</div>
                 <span class="social-label">${link.label}</span>
                 <span class="social-handle">${link.handle}</span>
             </a>
@@ -103,12 +100,14 @@ class ContactSection extends HTMLElement {
                 border-radius: var(--border-radius-lg);
                 transition: all var(--transition-medium);
                 text-align: left;
+                border: 1px solid transparent;
             }
 
             .contact-method:hover {
-                background-color: var(--light-blue);
-                transform: translateY(-4px);
-                box-shadow: var(--shadow-medium);
+                background-color: rgba(13, 64, 105, 0.08);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(13, 64, 105, 0.15);
+                border: 1px solid rgba(13, 64, 105, 0.2);
             }
 
             .contact-icon {
@@ -192,6 +191,14 @@ class ContactSection extends HTMLElement {
                 font-size: var(--font-size-xl);
                 color: white;
                 transition: background-color var(--transition-medium);
+                overflow: hidden;
+            }
+
+            .social-icon img {
+                width: 24px;
+                height: 24px;
+                filter: brightness(0) invert(1);
+                transition: filter var(--transition-medium);
             }
 
             .social-link:hover .social-icon {
@@ -397,6 +404,7 @@ class ContactSection extends HTMLElement {
         label: "GitHub",
         handle: "@assapir",
         icon: "🐙",
+        image: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg",
         url: "https://github.com/assapir",
       },
       {
@@ -404,6 +412,7 @@ class ContactSection extends HTMLElement {
         label: "Twitter",
         handle: "@meijin007",
         icon: "🐦",
+        image: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitter.svg",
         url: "https://twitter.com/meijin007",
       },
       {
@@ -411,7 +420,16 @@ class ContactSection extends HTMLElement {
         label: "LinkedIn",
         handle: "Assaf Sapir",
         icon: "💼",
+        image:
+          "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg",
         url: "https://www.linkedin.com/in/assaf-sapir/",
+      },
+      {
+        platform: "email",
+        label: "Email",
+        handle: "assaf@sapir.io",
+        icon: "📧",
+        url: "mailto:assaf@sapir.io",
       },
     ];
   }

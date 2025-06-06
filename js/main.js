@@ -217,7 +217,8 @@ class App {
     ║    👋 Hello there, fellow developer!                         ║
     ║                                                              ║
     ║    Welcome to Assaf Sapir's personal website.                ║
-    ║    Built with vanilla JavaScript and Web Components.         ║
+    ║    Built with vanilla JavaScript Web Components and          ║
+    ║    Vibe coding with CoPilot and Claude Sonnet 4.             ║
     ║                                                              ║
     ║    🚀 Modern, accessible, and performance-focused            ║
     ║    🎨 Clean design with CSS Grid and Flexbox                 ║
@@ -225,7 +226,7 @@ class App {
     ║    ⚡ Progressive enhancement and SEO optimized               ║
     ║                                                              ║
     ║    Interested in the code? Check it out on GitHub:           ║
-    ║    https://github.com/assapir                                ║
+    ║    https://github.com/assapir/blog                           ║
     ║                                                              ║
     ║    Let's connect and build something amazing together! 🤝    ║
     ║                                                              ║
