@@ -84,6 +84,17 @@
     font-size: var(--font-size-base);
   }
 
+  /* About stats responsive grid */
+  .about-stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+
+  .stat-item {
+    padding: var(--space-md);
+  }
+
   /* Projects Section */
   projects-section .projects-grid {
     grid-template-columns: 1fr;
@@ -160,6 +171,18 @@
   /* Skills */
   skills-section .skills-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* About stats for tablet */
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .stat-item:last-child {
+    grid-column: 1 / -1;
+    max-width: 300px;
+    margin: 0 auto;
   }
 }
 
