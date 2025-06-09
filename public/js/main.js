@@ -14,35 +14,9 @@ class App {
   }
 
   setupApp() {
-    this.setupTheme();
     this.setupSmoothScrolling();
-    this.setupPerformanceOptimizations();
     this.setupAccessibility();
     this.logWelcomeMessage();
-  }
-
-  setupTheme() {
-    // Check for saved theme preference or default to system preference
-    const savedTheme = localStorage.getItem("theme");
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
-      ? "dark"
-      : "light";
-    const theme = savedTheme || systemTheme;
-
-    document.documentElement.setAttribute("data-theme", theme);
-
-    // Listen for system theme changes
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (e) => {
-        if (!localStorage.getItem("theme")) {
-          document.documentElement.setAttribute(
-            "data-theme",
-            e.matches ? "dark" : "light"
-          );
-        }
-      });
   }
 
   setupSmoothScrolling() {
@@ -65,61 +39,6 @@ class App {
         }
       }
     });
-  }
-
-  setupPerformanceOptimizations() {
-    // Preload critical resources
-    this.preloadCriticalResources();
-
-    // Setup intersection observer for lazy loading
-    this.setupLazyLoading();
-
-    // Setup service worker for caching (if needed)
-    if ("serviceWorker" in navigator) {
-      // Uncomment when you have a service worker
-      // navigator.serviceWorker.register('/sw.js');
-    }
-  }
-
-  preloadCriticalResources() {
-    const criticalResources = [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
-    ];
-
-    criticalResources.forEach((resource) => {
-      const link = document.createElement("link");
-      link.rel = "preload";
-      link.as = "style";
-      link.href = resource;
-      document.head.appendChild(link);
-    });
-  }
-
-  setupLazyLoading() {
-    // Lazy load images and heavy content
-    const lazyElements = document.querySelectorAll("[data-lazy]");
-
-    if (lazyElements.length > 0) {
-      const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const element = entry.target;
-            const src = element.dataset.lazy;
-
-            if (element.tagName === "IMG") {
-              element.src = src;
-            } else {
-              element.style.backgroundImage = `url(${src})`;
-            }
-
-            element.removeAttribute("data-lazy");
-            imageObserver.unobserve(element);
-          }
-        });
-      });
-
-      lazyElements.forEach((element) => imageObserver.observe(element));
-    }
   }
 
   setupAccessibility() {
