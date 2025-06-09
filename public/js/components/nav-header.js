@@ -72,11 +72,13 @@ class NavHeader extends HTMLElement {
 
       // Add/remove backdrop blur based on scroll position
       if (currentScrollY > 50) {
-        this.style.backgroundColor = "rgba(255, 255, 255, 0.95)";
-        this.style.backdropFilter = "blur(10px)";
+        this.style.backgroundColor = "rgba(255, 255, 255, 0.98)";
+        this.style.backdropFilter = "blur(12px)";
+        this.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.15)";
       } else {
-        this.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
-        this.style.backdropFilter = "blur(5px)";
+        this.style.backgroundColor = "rgba(255, 255, 255, 0.98)";
+        this.style.backdropFilter = "blur(10px)";
+        this.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.1)";
       }
 
       // Hide/show navbar on scroll (optional)

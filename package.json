@@ -1,0 +1,14 @@
+{
+  "name": "personal-blog-worker",
+  "version": "1.0.0",
+  "description": "Personal blog deployed on Cloudflare Workers",
+  "main": "worker.js",
+  "scripts": {
+    "deploy": "npx wrangler deploy",
+    "dev": "npx wrangler dev",
+    "preview": "npx wrangler dev --remote"
+  },
+  "devDependencies": {
+    "wrangler": "^4.19.1"
+  }
+}

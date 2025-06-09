@@ -8,20 +8,20 @@
 }
 
 :root {
-  /* Colors - Modern Minimalist Theme - WCAG Compliant */
+  /* Colors - Dark Theme - WCAG Compliant */
   --primary-dark: #1a1a2e;
-  --primary-blue: #0d4069; /* Darker for better contrast */
+  --primary-blue: #4a9eff; /* Lighter for dark mode contrast */
   --accent-blue: #0a3555;
   --light-blue: #e3f2fd;
-  --text-primary: #1a1a1a; /* Darker for better contrast */
-  --text-secondary: #3a3a3a; /* Improved contrast from #4a4a4a */
-  --text-light: #555555; /* Improved contrast from #6a6a6a */
-  --background-primary: #ffffff;
-  --background-secondary: #f8f9fa;
-  --border-color: #e0e0e0;
-  --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
-  --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
-  --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.2);
+  --text-primary: #ffffff;
+  --text-secondary: #c9d1d9; /* Lighter for better contrast */
+  --text-light: #8b949e; /* Lighter for better contrast */
+  --background-primary: #0d1117;
+  --background-secondary: #161b22;
+  --border-color: #30363d;
+  --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.5);
 
   /* Typography */
   --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -59,20 +59,19 @@
   --transition-slow: 0.5s ease;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-blue: #4a9eff; /* Lighter for dark mode contrast */
-    --text-primary: #ffffff;
-    --text-secondary: #c9d1d9; /* Lighter for better contrast */
-    --text-light: #8b949e; /* Lighter for better contrast */
-    --background-primary: #0d1117;
-    --background-secondary: #161b22;
-    --border-color: #30363d;
-    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.3);
-    --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.4);
-    --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.5);
-  }
+/* Navigation styles for dark theme */
+nav-header {
+  background-color: rgba(13, 17, 23, 0.98) !important;
+  border-bottom: 1px solid var(--border-color);
+}
+
+nav-header .nav-link:hover,
+nav-header .nav-link.active {
+  background-color: rgba(74, 158, 255, 0.15);
+}
+
+nav-header .mobile-menu-btn:hover {
+  background-color: rgba(74, 158, 255, 0.15);
 }
 
 /* Base styles */
@@ -228,11 +227,11 @@ a:focus {
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   :root {
-    --text-primary: #000000;
-    --text-secondary: #000000;
-    --primary-blue: #0000ff;
-    --background-primary: #ffffff;
-    --border-color: #000000;
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --primary-blue: #66b3ff;
+    --background-primary: #000000;
+    --border-color: #ffffff;
   }
 }
 
@@ -250,8 +249,8 @@ a:focus {
 
 /* Selection styles */
 ::selection {
-  background-color: var(--light-blue);
-  color: var(--accent-blue); /* Better contrast */
+  background-color: rgba(74, 158, 255, 0.3);
+  color: var(--text-primary);
 }
 
 /* Scrollbar styles */
