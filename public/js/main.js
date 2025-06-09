@@ -18,7 +18,6 @@ class App {
     this.setupSmoothScrolling();
     this.setupPerformanceOptimizations();
     this.setupAccessibility();
-    this.setupAnalytics();
     this.logWelcomeMessage();
   }
 
@@ -168,44 +167,6 @@ class App {
           document.querySelector("#mobileMenuBtn")?.click();
         }
       }
-    });
-  }
-
-  setupAnalytics() {
-    // Setup basic analytics (privacy-friendly)
-    this.trackPageView();
-    this.trackUserInteractions();
-  }
-
-  trackPageView() {
-    // Simple analytics - replace with your preferred analytics solution
-    console.log("Page view tracked:", {
-      url: window.location.href,
-      timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent,
-      referrer: document.referrer,
-    });
-  }
-
-  trackUserInteractions() {
-    // Track important user interactions
-    document.addEventListener("click", (e) => {
-      const link = e.target.closest('a[href^="http"], a[href^="mailto:"]');
-      if (link) {
-        console.log("External link clicked:", {
-          url: link.href,
-          text: link.textContent.trim(),
-          timestamp: new Date().toISOString(),
-        });
-      }
-    });
-
-    // Track form submissions
-    document.addEventListener("submit", (e) => {
-      console.log("Form submitted:", {
-        formId: e.target.id || "unknown",
-        timestamp: new Date().toISOString(),
-      });
     });
   }
 
