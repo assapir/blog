@@ -28,7 +28,6 @@ class SkillsSection extends HTMLElement {
         `;
 
     this.setAttribute("id", "skills");
-    this.addStyles();
   }
 
   createSkillCategory(category, skills) {
@@ -67,48 +66,6 @@ class SkillsSection extends HTMLElement {
                 </div>
             </section>
         `;
-  }
-
-  addStyles() {
-    const style = document.createElement("style");
-    style.textContent = `
-            .skill-item {
-                display: flex;
-                align-items: center;
-                gap: var(--space-xs);
-                position: relative;
-                overflow: hidden;
-            }
-
-            .skill-item::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-                transition: left 0.5s;
-            }
-
-            .skill-item:hover::before {
-                left: 100%;
-            }
-
-            .skill-icon {
-                font-size: var(--font-size-lg);
-            }
-
-            .skill-level {
-                font-size: var(--font-size-xs);
-                background-color: var(--primary-blue);
-                color: white;
-                padding: 2px var(--space-xs);
-                border-radius: var(--border-radius-sm);
-                margin-left: auto;
-            }
-        `;
-    document.head.appendChild(style);
   }
 
   setupAnimations() {
