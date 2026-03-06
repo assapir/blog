@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Assaf Sapir</title>
+  <meta name="description"
+    content="Blog posts by Assaf Sapir about software development, JavaScript, Web Components, and open source.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/components.css">
+  <link rel="stylesheet" href="/styles/responsive.css">
+  <link rel="stylesheet" href="/styles/blog.css">
+
+  <meta name="theme-color" content="#0d1117">
+  <link rel="canonical" href="https://sapir.io/blog/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blog - Assaf Sapir">
+  <meta property="og:description" content="Blog posts about software development, JavaScript, Web Components, and open source.">
+  <meta property="og:url" content="https://sapir.io/blog/">
+  <meta property="og:image" content="https://sapir.io/images/og-image.png">
+  <meta property="og:site_name" content="Assaf Sapir">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@meijin007">
+  <meta name="twitter:title" content="Blog - Assaf Sapir">
+  <meta name="twitter:description" content="Blog posts about software development, JavaScript, Web Components, and open source.">
+  <meta name="twitter:image" content="https://sapir.io/images/og-image.png">
+
+  <link rel="alternate" type="application/atom+xml" title="Assaf Sapir's Blog" href="/feed.xml">
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
+</head>
+
+<body>
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+  <nav-header></nav-header>
+
+  <main role="main" aria-label="Blog" id="main-content">
+    <blog-page></blog-page>
+  </main>
+
+  <footer-component></footer-component>
+
+  <script type="module" src="/js/components/nav-header.js"></script>
+  <script type="module" src="/js/components/blog-page.js"></script>
+  <script type="module" src="/js/components/footer-component.js"></script>
+  <script type="module" src="/js/main.js"></script>
+
+</body>
+
+</html>
