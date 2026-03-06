@@ -8,6 +8,9 @@ class FooterComponent extends HTMLElement {
     this.innerHTML = `
             <div class="footer-content">
                 <p>&copy; ${new Date().getFullYear()} Assaf Sapir. Built with ❤️ using vanilla JavaScript, Web Components and vibe coding.</p>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="/uses/">Uses</a>
+                </nav>
                 <button class="back-to-top" id="backToTop" aria-label="Back to top">
                     ↑
                 </button>

@@ -65,6 +65,7 @@ class UsesPage extends HTMLElement {
         title: "Operating Systems & Desktop",
         items: [
           { name: "Arch Linux", url: "https://archlinux.org/", description: "btw" },
+          { name: "yay", url: "https://github.com/Jguer/yay", description: "AUR helper" },
           { name: "GNOME", url: "https://www.gnome.org/", description: "Desktop environment" },
           { name: "Firefox", url: "https://www.mozilla.org/firefox/", description: "Primary browser" },
         ],
