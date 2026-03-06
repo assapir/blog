@@ -16,7 +16,33 @@ class App {
   setupApp() {
     this.setupSmoothScrolling();
     this.setupAccessibility();
+    this.handleInitialHash();
     this.logWelcomeMessage();
+  }
+
+  handleInitialHash() {
+    const hash = window.location.hash;
+    const isHomePage =
+      window.location.pathname === "/" ||
+      window.location.pathname === "/index.html";
+    if (!hash || !isHomePage) return;
+
+    // Prevent the browser's native jump
+    history.scrollRestoration = "manual";
+    window.scrollTo({ top: 0 });
+
+    // Wait for Web Components to render, then smooth-scroll to the target
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        const targetElement = document.getElementById(hash.substring(1));
+        if (targetElement) {
+          const navHeight =
+            document.querySelector("nav-header").offsetHeight;
+          const targetPosition = targetElement.offsetTop - navHeight - 20;
+          window.scrollTo({ top: targetPosition, behavior: "smooth" });
+        }
+      }, 100);
+    });
   }
 
   setupSmoothScrolling() {
@@ -24,11 +50,11 @@ class App {
     document.addEventListener("click", (e) => {
       const link = e.target.closest('a[href^="#"]');
       if (link) {
-        e.preventDefault();
         const targetId = link.getAttribute("href").substring(1);
         const targetElement = document.getElementById(targetId);
 
         if (targetElement) {
+          e.preventDefault();
           const navHeight = document.querySelector("nav-header").offsetHeight;
           const targetPosition = targetElement.offsetTop - navHeight - 20;
 

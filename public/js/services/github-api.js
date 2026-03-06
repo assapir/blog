@@ -6,6 +6,7 @@ class GitHubApiService {
     this.baseUrl = "https://api.github.com";
     this.username = "assapir";
     this.cacheKey = "github-repos-cache";
+    this.rateLimitKey = "github-rate-limit-reset";
     this.cacheExpiry = 10 * 60 * 1000; // 10 minutes
   }
 
@@ -32,6 +33,11 @@ class GitHubApiService {
       return cachedData;
     }
 
+    // Skip API call if rate-limited
+    if (this.isRateLimited()) {
+      throw new Error("GitHub API rate limit active");
+    }
+
     try {
       const url =
         `${this.baseUrl}/users/${this.username}/repos?` +
@@ -43,6 +49,21 @@ class GitHubApiService {
           "User-Agent": "Personal-Portfolio-Website",
         },
       });
+
+      // Handle rate limiting
+      const remaining = parseInt(
+        response.headers.get("X-RateLimit-Remaining"),
+        10
+      );
+      const resetTime = parseInt(
+        response.headers.get("X-RateLimit-Reset"),
+        10
+      );
+
+      if (response.status === 403 && remaining === 0) {
+        this.setRateLimitReset(resetTime);
+        throw new Error("GitHub API rate limit exceeded");
+      }
 
       if (!response.ok) {
         throw new Error(
@@ -169,6 +190,36 @@ class GitHubApiService {
       techMap[topic.toLowerCase()] ||
       topic.charAt(0).toUpperCase() + topic.slice(1).replace(/-/g, " ")
     );
+  }
+
+  /**
+   * Check if we are currently rate-limited by GitHub
+   * @returns {boolean} True if rate limit is still active
+   */
+  isRateLimited() {
+    try {
+      const resetTime = localStorage.getItem(this.rateLimitKey);
+      if (!resetTime) return false;
+      if (Date.now() / 1000 > parseInt(resetTime, 10)) {
+        localStorage.removeItem(this.rateLimitKey);
+        return false;
+      }
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Store the rate limit reset timestamp
+   * @param {number} resetTime - Unix timestamp when rate limit resets
+   */
+  setRateLimitReset(resetTime) {
+    try {
+      localStorage.setItem(this.rateLimitKey, String(resetTime));
+    } catch {
+      // Ignore storage errors
+    }
   }
 
   /**

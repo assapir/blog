@@ -71,13 +71,6 @@ class ContactSection extends HTMLElement {
       });
     });
 
-    // Add click tracking for analytics
-    const socialLinks = this.querySelectorAll(".social-link");
-    socialLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        console.log("Social link clicked:", link.dataset.platform);
-      });
-    });
   }
 
   getSocialLinks() {

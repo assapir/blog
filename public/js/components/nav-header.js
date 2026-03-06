@@ -10,17 +10,26 @@ class NavHeader extends HTMLElement {
     this.setupScrollEffect();
   }
 
+  get isHomePage() {
+    const path = window.location.pathname;
+    return path === "/" || path === "/index.html";
+  }
+
   render() {
+    const prefix = this.isHomePage ? "" : "/";
+    const blogActive = window.location.pathname.startsWith("/blog") ? " active" : "";
+
     this.innerHTML = `
             <div class="nav-container">
-                <a href="#home" class="logo">Assaf Sapir</a>
+                <a href="/" class="logo">Assaf Sapir</a>
 
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="#home" class="nav-link active">Home</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#projects" class="nav-link">Projects</a></li>
-                    <li><a href="#skills" class="nav-link">Skills</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="${prefix}#home" class="nav-link${this.isHomePage ? " active" : ""}">Home</a></li>
+                    <li><a href="${prefix}#about" class="nav-link">About</a></li>
+                    <li><a href="${prefix}#projects" class="nav-link">Projects</a></li>
+                    <li><a href="${prefix}#skills" class="nav-link">Skills</a></li>
+                    <li><a href="/blog/" class="nav-link${blogActive}">Blog</a></li>
+                    <li><a href="${prefix}#contact" class="nav-link">Contact</a></li>
                 </ul>
 
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
@@ -60,8 +69,10 @@ class NavHeader extends HTMLElement {
       });
     });
 
-    // Intersection Observer for active section highlighting
-    this.setupIntersectionObserver();
+    // Intersection Observer for active section highlighting (home page only)
+    if (this.isHomePage) {
+      this.setupIntersectionObserver();
+    }
   }
 
   setupScrollEffect() {
@@ -70,22 +81,15 @@ class NavHeader extends HTMLElement {
     window.addEventListener("scroll", () => {
       const currentScrollY = window.scrollY;
 
-      // Add/remove backdrop blur based on scroll position
-      if (currentScrollY > 50) {
-        this.style.backgroundColor = "rgba(255, 255, 255, 0.98)";
-        this.style.backdropFilter = "blur(12px)";
-        this.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.15)";
-      } else {
-        this.style.backgroundColor = "rgba(255, 255, 255, 0.98)";
-        this.style.backdropFilter = "blur(10px)";
-        this.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.1)";
-      }
+      // Add/remove scrolled class based on scroll position
+      this.classList.toggle("scrolled", currentScrollY > 50);
 
-      // Hide/show navbar on scroll (optional)
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        this.style.transform = "translateY(-100%)";
-      } else {
-        this.style.transform = "translateY(0)";
+      // Hide/show navbar on scroll (home page only — don't hide while reading blog posts)
+      if (this.isHomePage) {
+        this.classList.toggle(
+          "nav-hidden",
+          currentScrollY > lastScrollY && currentScrollY > 100
+        );
       }
 
       lastScrollY = currentScrollY;
