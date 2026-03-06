@@ -18,6 +18,7 @@ class NavHeader extends HTMLElement {
   render() {
     const prefix = this.isHomePage ? "" : "/";
     const blogActive = window.location.pathname.startsWith("/blog") ? " active" : "";
+    const usesActive = window.location.pathname.startsWith("/uses") ? " active" : "";
 
     const logoHref = this.isHomePage ? "#home" : "/";
     this.innerHTML = `
@@ -30,6 +31,7 @@ class NavHeader extends HTMLElement {
                     <li><a href="${prefix}#projects" class="nav-link">Projects</a></li>
                     <li><a href="${prefix}#skills" class="nav-link">Skills</a></li>
                     <li><a href="/blog/" class="nav-link${blogActive}">Blog</a></li>
+                    <li><a href="/uses/" class="nav-link${usesActive}">Uses</a></li>
                     <li><a href="${prefix}#contact" class="nav-link">Contact</a></li>
                 </ul>
 

@@ -1,0 +1,115 @@
+/* Uses Page Styles */
+
+/* Uses page layout */
+.uses-page {
+  padding-top: 100px;
+  padding-bottom: var(--space-4xl);
+  min-height: 100vh;
+}
+
+.uses-header {
+  text-align: center;
+  margin-bottom: var(--space-4xl);
+}
+
+.uses-header h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.uses-header p {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+}
+
+/* Content area */
+.uses-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Category sections */
+.uses-category {
+  margin-bottom: var(--space-3xl);
+}
+
+.uses-category h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--primary-blue);
+}
+
+/* Item list */
+.uses-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Individual items */
+.uses-item {
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.uses-item:hover {
+  border-color: var(--primary-blue);
+}
+
+.uses-item-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.uses-item-name a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.uses-item-name a:hover,
+.uses-item-description a:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.uses-item-description a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.uses-item-description {
+  color: var(--text-secondary);
+  margin-left: var(--space-xs);
+}
+
+.uses-item-description::before {
+  content: "\2014\00a0";
+  color: var(--text-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .uses-page {
+    padding-top: 80px;
+  }
+
+  .uses-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .uses-item {
+    padding: var(--space-sm) var(--space-md);
+  }
+}
