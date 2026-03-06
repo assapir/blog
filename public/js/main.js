@@ -28,6 +28,7 @@ class App {
     if (!hash || !isHomePage) return;
 
     // Prevent the browser's native jump
+    const previousRestoration = history.scrollRestoration;
     history.scrollRestoration = "manual";
     window.scrollTo({ top: 0 });
 
@@ -41,6 +42,7 @@ class App {
           const targetPosition = targetElement.offsetTop - navHeight - 20;
           window.scrollTo({ top: targetPosition, behavior: "smooth" });
         }
+        history.scrollRestoration = previousRestoration || "auto";
       }, 100);
     });
   }

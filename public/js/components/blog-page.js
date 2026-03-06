@@ -1,5 +1,8 @@
 import { marked } from "https://esm.sh/marked@15";
 
+// Disable raw HTML passthrough in markdown to prevent XSS
+marked.use({ renderer: { html: (token) => "" } });
+
 class BlogPage extends HTMLElement {
   constructor() {
     super();
@@ -49,11 +52,28 @@ class BlogPage extends HTMLElement {
 
   async loadContent() {
     const slug = window.location.hash.slice(1).replace(/[^a-z0-9-]/g, "");
+
     if (slug) {
-      await this.loadPost(slug);
-    } else {
-      await this.loadListing();
+      // Ensure posts are loaded so we can check if the hash is a valid slug
+      if (this.posts.length === 0) {
+        try {
+          const response = await fetch("/posts/posts.json");
+          if (response.ok) this.posts = await response.json();
+        } catch {
+          // Will be handled by loadPost/loadListing
+        }
+      }
+
+      const isKnownPost = this.posts.some((p) => p.slug === slug);
+      if (isKnownPost) {
+        await this.loadPost(slug);
+        window.scrollTo({ top: 0 });
+        return;
+      }
+      // Unknown hash (e.g. in-page anchor) — ignore, let browser handle it
     }
+
+    await this.loadListing();
     window.scrollTo({ top: 0 });
   }
 
@@ -117,6 +137,7 @@ class BlogPage extends HTMLElement {
   }
 
   async loadListing() {
+    document.title = "Blog - Assaf Sapir";
     const content = this.querySelector("#blogContent");
     try {
       if (this.posts.length === 0) {

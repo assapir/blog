@@ -19,9 +19,10 @@ class NavHeader extends HTMLElement {
     const prefix = this.isHomePage ? "" : "/";
     const blogActive = window.location.pathname.startsWith("/blog") ? " active" : "";
 
+    const logoHref = this.isHomePage ? "#home" : "/";
     this.innerHTML = `
             <div class="nav-container">
-                <a href="/" class="logo">Assaf Sapir</a>
+                <a href="${logoHref}" class="logo">Assaf Sapir</a>
 
                 <ul class="nav-links" id="navLinks">
                     <li><a href="${prefix}#home" class="nav-link${this.isHomePage ? " active" : ""}">Home</a></li>
