@@ -67,125 +67,19 @@ Also worth noting: ALARM's `linux-rpi-16k` uses 16KB pages, which is better for 
 
 ## Testing It in a VM
 
-I didn't want to mess with my working Pi setup, so I built a VM image and tested it in [UTM](https://getutm.app/) on my Mac. This turned out to be more of an adventure than expected.
+I didn't want to mess with my working Pi setup, so I built a VM image and tested it in [UTM](https://getutm.app/) on my Mac. I wrote up the [full procedure as a gist](https://gist.github.com/assapir/8081b2cedafdc7d0b0f79d79a7da1a04), but here's the short version of what happened.
 
-### Building the disk image
+The idea is simple: create a raw disk image on the Pi, partition it, extract the drzee bootstrap tarball, install the kernel, set up a bootloader, convert to qcow2, and boot it in UTM. In practice, I spent most of my time fighting with GRUB.
 
-You need a running aarch64 Linux box to do this. I used my Pi. Install `gptfdisk`, `qemu-img`, `arch-install-scripts`, and `dosfstools` first.
+`grub-mkconfig` inside a chroot on a loop device produced a config file full of null bytes. I wrote `grub.cfg` by hand, but then GRUB couldn't find its own modules across partitions. I tried `--boot-directory` to put the modules on the EFI partition. That got further, but then GRUB refused to load the kernel — "plain image kernel not supported, rebuild with CONFIG_EFI_STUB enabled." I gave up on GRUB.
 
-```bash
-# Create an 8GB raw disk
-dd if=/dev/zero of=arch-aarch64.raw bs=1M count=8192
+**systemd-boot took about 30 seconds to set up** and worked on the first try. The key thing I learned: mount the FAT32 EFI partition at `/boot`, not `/boot/efi`. That way pacman drops the kernel and initramfs directly where the bootloader can see them. No copying, no hooks.
 
-# Two partitions: FAT32 for /boot, ext4 for /
-sgdisk -o \
-  -n 1:0:+512M -t 1:ef00 -c 1:boot \
-  -n 2:0:0     -t 2:8300 -c 2:root \
-  arch-aarch64.raw
-
-sudo losetup -fP arch-aarch64.raw
-LOOP=$(losetup -j arch-aarch64.raw | cut -d: -f1)
-
-sudo mkfs.fat -F32 ${LOOP}p1
-sudo mkfs.ext4 ${LOOP}p2
-
-# This part matters: FAT32 goes at /boot, not /boot/efi
-sudo mount ${LOOP}p2 /mnt
-sudo mkdir -p /mnt/boot
-sudo mount ${LOOP}p1 /mnt/boot
-```
-
-Getting the mount layout right is important. FAT32 at `/boot` means the kernel and initramfs land directly on the EFI partition when you install them. I initially had it at `/boot/efi` and spent way too long debugging why the bootloader couldn't find things.
-
-### Extracting the bootstrap and installing packages
-
-The drzee port has [bootstrap tarballs](https://arch-linux-repo.drzee.net/arch/tarballs/os/aarch64/) — basically a minimal rootfs with pacman pre-configured to point at the drzee repos.
-
-```bash
-curl -LO https://arch-linux-repo.drzee.net/arch/tarballs/os/aarch64/archlinux-bootstrap-2026.03.15-aarch64.tar.zst
-sudo tar xf archlinux-bootstrap-2026.03.15-aarch64.tar.zst -C /mnt --strip-components=1
-
-sudo arch-chroot /mnt
-
-# Set up pacman keyring
-pacman-key --init
-pacman-key --populate archlinux
-
-# Import the drzee signing key
-curl -sL https://arch-linux-repo.drzee.net/arch/extra/os/aarch64/public.key -o /tmp/drzee.key
-pacman-key --add /tmp/drzee.key
-pacman-key --lsign-key 0CF25682E6BA0751
-
-# Install just enough to boot
-pacman -Sy
-pacman -S base linux linux-firmware efibootmgr
-```
-
-### Don't forget to set a root password
-
-I didn't, and then I couldn't log in. The bootstrap tarball ships with root **locked** — there's literally a `*` in `/etc/shadow`. Empty password won't work either. Set one:
-
-```bash
-passwd
-```
-
-### The bootloader saga
-
-I went with GRUB first because that's what I know. Mistakes were made.
-
-`grub-mkconfig` inside a chroot on a loop device produced a config file full of null bytes. I wrote `grub.cfg` by hand, but then GRUB couldn't load the kernel from the ext4 partition — "plain image kernel not supported, rebuild with CONFIG_EFI_STUB enabled." I tried putting the GRUB modules on the EFI partition with `--boot-directory`. It half-worked. I gave up.
-
-**systemd-boot is the answer.** It's already there (part of systemd), and it took about 30 seconds to set up:
-
-```bash
-echo "KEYMAP=us" > /etc/vconsole.conf
-mkinitcpio -P
-bootctl install --esp-path=/boot
-
-exit  # leave chroot
-```
-
-Then write the loader config from outside the chroot:
-
-```bash
-ROOT_UUID=$(sudo blkid -s UUID -o value ${LOOP}p2)
-
-sudo tee /mnt/boot/loader/loader.conf << 'EOF'
-default arch.conf
-timeout 3
-EOF
-
-sudo mkdir -p /mnt/boot/loader/entries
-sudo tee /mnt/boot/loader/entries/arch.conf << EOF
-title   Arch Linux (aarch64)
-linux   /vmlinuz-linux
-initrd  /initramfs-linux.img
-options root=UUID=${ROOT_UUID} rw console=ttyAMA0 console=tty0
-EOF
-```
-
-Because `/boot` is the FAT32 EFI partition, the kernel and initramfs are already right where systemd-boot expects them. No extra copying, no pacman hooks needed.
-
-### Wrapping up the image
-
-```bash
-sudo bash -c "genfstab -U /mnt > /mnt/etc/fstab"
-sudo umount -R /mnt
-sudo losetup -d $LOOP
-
-qemu-img convert -f raw -O qcow2 -c arch-aarch64.raw arch-aarch64.qcow2
-rm arch-aarch64.raw
-```
-
-### Booting in UTM
-
-In UTM: **Virtualize → Other**, skip the ISO, import the qcow2, make sure UEFI is selected.
-
-UTM also supports **direct kernel boot** if you don't want to bother with a bootloader at all — just point it at the kernel and initramfs files and pass the boot arguments in the VM settings.
+The other gotcha: the bootstrap tarball ships with root **locked** (`root:*` in `/etc/shadow`). Not an empty password — *no* password works. I booted the VM, stared at the login prompt, and had to mount the image again to fix it. Don't forget to run `passwd`.
 
 ## Installing on a Real Raspberry Pi 5
 
-If you want to try this on actual hardware, I wrote a full step-by-step guide as a [GitHub Gist](https://gist.github.com/assapir/bfb047ac1abc1d1adf112b7bdbdef2d5). The short version: it's similar to the VM process above, but you use the RPi firmware boot chain (`config.txt` + `cmdline.txt`) instead of UEFI/systemd-boot, and you install `linux-rpi5` from the `[forge]` repo instead of the mainline `linux` kernel. The only manual step is downloading `start4.elf` and `fixup4.dat` from GitHub — everything else (`config.txt`, `cmdline.txt`, DTBs, overlays) is handled by the `linux-rpi5` package automatically.
+If you want to try this on actual hardware, I wrote a [step-by-step guide](https://gist.github.com/assapir/bfb047ac1abc1d1adf112b7bdbdef2d5). It's simpler than the VM — the RPi firmware handles booting, so no GRUB/systemd-boot needed. You install `linux-rpi5` from the `[forge]` repo, which auto-generates `config.txt` and `cmdline.txt`. The only manual step is downloading `start4.elf` and `fixup4.dat` from GitHub since no package provides them.
 
 ## So Should You Switch?
 
