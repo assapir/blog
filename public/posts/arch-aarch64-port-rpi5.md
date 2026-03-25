@@ -183,7 +183,7 @@ UTM also supports **direct kernel boot** if you don't want to bother with a boot
 
 ## Installing on a Real Raspberry Pi 5
 
-If you want to try this on actual hardware, I wrote a full step-by-step guide as a [GitHub Gist](https://gist.github.com/assapir/bfb047ac1abc1d1adf112b7bdbdef2d5). The short version: it's similar to the VM process above, but you use the RPi firmware boot chain (`config.txt` + `cmdline.txt`) instead of UEFI/systemd-boot, and you install `linux-rpi5` from the `[forge]` repo instead of the mainline `linux` kernel. The main annoyance is manually downloading `start4.elf` and the device tree blobs from GitHub since there's no bootloader package.
+If you want to try this on actual hardware, I wrote a full step-by-step guide as a [GitHub Gist](https://gist.github.com/assapir/bfb047ac1abc1d1adf112b7bdbdef2d5). The short version: it's similar to the VM process above, but you use the RPi firmware boot chain (`config.txt` + `cmdline.txt`) instead of UEFI/systemd-boot, and you install `linux-rpi5` from the `[forge]` repo instead of the mainline `linux` kernel. The main annoyance is manually downloading `start4.elf` and `fixup4.dat` from GitHub since no package provides the RPi GPU boot firmware (DTBs and overlays are included in the `linux-rpi5` package though).
 
 ## So Should You Switch?
 
