@@ -48,9 +48,11 @@ The `[forge]` repo has the basics:
 - `rpi5-eeprom` — EEPROM bootloader updates
 - `raspberrypi-utils` — vcgencmd and other Pi tools
 
-But there's a gap that'll bite you: **no `raspberrypi-bootloader` package**. That's the one that provides `start4.elf`, `fixup4.dat`, and the other GPU firmware files the Pi needs to boot. On ALARM this just comes with the system. Here, you have to go grab them from the [raspberrypi/firmware](https://github.com/raspberrypi/firmware) GitHub repo yourself.
+But there's a gap: **no `raspberrypi-bootloader` package**. That's the one that provides `start4.elf` and `fixup4.dat` — the boot firmware the RPi 5 EEPROM requires to start. Without them you get a fatal `Firmware (start*.elf) not found` error. On ALARM these just come with the system. Here, you have to grab them from the [raspberrypi/firmware](https://github.com/raspberrypi/firmware) GitHub repo.
 
-Also worth noting: ALARM's `linux-rpi-16k` uses 16KB pages, which is better for RPi 5 performance. The drzee kernel probably uses 4KB.
+The good news: the [`linux-rpi5` package](https://github.com/bschnei/linux-rpi5) handles everything else — DTBs, overlays, and it even auto-generates `config.txt` and `cmdline.txt` on first install. So it's really just those two files that are missing.
+
+Also worth noting: ALARM's `linux-rpi-16k` uses 16KB pages, which is better for RPi 5 performance. The drzee kernel uses 4KB.
 
 ## Quick Comparison
 
@@ -58,7 +60,7 @@ Also worth noting: ALARM's `linux-rpi-16k` uses 16KB pages, which is better for 
 |---|---|---|
 | Status | Established, been around for years | Unofficial, no RFC, community effort |
 | Mirrors | ~10 worldwide | One S3 bucket |
-| RPi 5 support | First-class | Partial — no boot firmware package |
+| RPi 5 support | First-class | Good — just missing `start4.elf`/`fixup4.dat` |
 | Package freshness | Same as upstream right now | Same, rebuilt independently |
 | Build model | ARM-patched fork of Arch | Straight upstream rebuild |
 | Risk | Might lag on big toolchain bumps | One person, one host |
@@ -183,7 +185,7 @@ UTM also supports **direct kernel boot** if you don't want to bother with a boot
 
 ## Installing on a Real Raspberry Pi 5
 
-If you want to try this on actual hardware, I wrote a full step-by-step guide as a [GitHub Gist](https://gist.github.com/assapir/bfb047ac1abc1d1adf112b7bdbdef2d5). The short version: it's similar to the VM process above, but you use the RPi firmware boot chain (`config.txt` + `cmdline.txt`) instead of UEFI/systemd-boot, and you install `linux-rpi5` from the `[forge]` repo instead of the mainline `linux` kernel. The main annoyance is manually downloading `start4.elf` and `fixup4.dat` from GitHub since no package provides the RPi GPU boot firmware (DTBs and overlays are included in the `linux-rpi5` package though).
+If you want to try this on actual hardware, I wrote a full step-by-step guide as a [GitHub Gist](https://gist.github.com/assapir/bfb047ac1abc1d1adf112b7bdbdef2d5). The short version: it's similar to the VM process above, but you use the RPi firmware boot chain (`config.txt` + `cmdline.txt`) instead of UEFI/systemd-boot, and you install `linux-rpi5` from the `[forge]` repo instead of the mainline `linux` kernel. The only manual step is downloading `start4.elf` and `fixup4.dat` from GitHub — everything else (`config.txt`, `cmdline.txt`, DTBs, overlays) is handled by the `linux-rpi5` package automatically.
 
 ## So Should You Switch?
 
