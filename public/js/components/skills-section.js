@@ -108,7 +108,6 @@ class SkillsSection extends HTMLElement {
     return {
       languages: [
         { name: "JavaScript", icon: "🟨", level: "Expert" },
-        { name: "HTML5", icon: "🧱", level: "Expert" },
         { name: "TypeScript", icon: "🔷", level: "Expert" },
         { name: "CSS3", icon: "🎨", level: "Advanced" },
         { name: "Rust", icon: "🦀", level: "Advanced" },
@@ -119,12 +118,8 @@ class SkillsSection extends HTMLElement {
         { name: "Express.js", icon: "⚡", level: "Expert" },
         { name: "Web Components", icon: "🧩", level: "Advanced" },
         { name: "React", icon: "⚛️", level: "Advanced" },
-        { name: "Vue.js", icon: "💚", level: "Learning" },
       ],
       tools: [
-        { name: "Git", icon: "📝", level: "Expert" },
-        { name: "GitHub", icon: "🐙", level: "Expert" },
-        { name: "VS Code", icon: "📘", level: "Expert" },
         { name: "Linux", icon: "🐧", level: "Advanced" },
         { name: "Docker", icon: "🐳", level: "Advanced" },
       ],

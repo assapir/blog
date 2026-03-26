@@ -47,6 +47,7 @@
   --space-4xl: 6rem;
 
   /* Layout */
+  --nav-height: 60px;
   --container-max-width: 1200px;
   --section-padding: var(--space-4xl) var(--space-xl);
   --border-radius: 12px;

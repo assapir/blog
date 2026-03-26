@@ -4,7 +4,7 @@
 @media (max-width: 768px) {
   :root {
     --section-padding: var(--space-2xl) var(--space-md);
-    --space-4xl: 2rem;
+    --space-4xl: 3rem;
   }
 
   .container {
@@ -45,15 +45,17 @@
     color: white;
   }
 
+  nav-header .nav-links .nav-link::after {
+    display: none;
+  }
+
   nav-header .mobile-menu-btn {
     display: block;
   }
 
   /* Hero Section */
   hero-section .hero-container {
-    grid-template-columns: 1fr;
     text-align: center;
-    gap: var(--space-2xl);
     padding: var(--space-xl) var(--space-md);
   }
 
@@ -69,46 +71,19 @@
     font-size: var(--font-size-base);
   }
 
-  hero-section .hero-image {
-    width: 250px;
-    height: 250px;
-    font-size: var(--font-size-3xl);
-  }
-
   hero-section .hero-actions {
-    justify-content: center;
+    grid-template-columns: 1fr;
+    justify-items: center;
     gap: var(--space-md);
   }
 
   /* About Section */
-  about-section .about-container {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: var(--space-2xl);
-  }
-
-  about-section .about-image {
-    max-width: 200px;
-    margin: 0 auto;
-  }
-
   about-section .about-content h2 {
     font-size: var(--font-size-2xl);
   }
 
   about-section .about-content p {
     font-size: var(--font-size-base);
-  }
-
-  /* About stats responsive grid */
-  .about-stats {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-    margin-top: var(--space-xl);
-  }
-
-  .stat-item {
-    padding: var(--space-md);
   }
 
   /* Projects Section */
@@ -228,11 +203,6 @@
     font-size: var(--font-size-4xl);
   }
 
-  hero-section .hero-image {
-    width: 350px;
-    height: 350px;
-  }
-
   /* Projects */
   projects-section .projects-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -243,17 +213,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* About stats for tablet */
-  .about-stats {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-lg);
-  }
-
-  .stat-item:last-child {
-    grid-column: 1 / -1;
-    max-width: 300px;
-    margin: 0 auto;
-  }
 }
 
 /* Large screens (1025px and up) */
@@ -279,10 +238,6 @@
     font-size: var(--font-size-6xl);
   }
 
-  hero-section .hero-image {
-    width: 450px;
-    height: 450px;
-  }
 }
 
 /* Small mobile devices (up to 480px) */

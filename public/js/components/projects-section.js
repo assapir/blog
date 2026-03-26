@@ -109,8 +109,6 @@ class ProjectsSection extends HTMLElement {
       this.loading = false;
       this.updateContent();
 
-      // Re-setup interactions after content loads
-      setTimeout(() => this.setupInteractions(), 100);
     } catch (error) {
       this.loading = false;
       this.error = error.message;
@@ -136,13 +134,6 @@ class ProjectsSection extends HTMLElement {
             }" aria-labelledby="project-${project.id}-title">
                 <div class="project-header">
                     <h3 id="project-${project.id}-title">${project.name}</h3>
-                    <div class="project-status">
-                        <span class="status-badge ${
-                          project.status
-                        }" aria-label="Project status: ${project.status}">${
-      project.status
-    }</span>
-                    </div>
                 </div>
 
                 <p>${project.description}</p>
@@ -157,8 +148,8 @@ class ProjectsSection extends HTMLElement {
                 </div>
 
                 <div class="project-stats">
-                    <span class="stat">⭐ ${project.stars}</span>
-                    <span class="stat">🍴 ${project.forks}</span>
+                    ${project.stars > 0 ? `<span class="stat">⭐ ${project.stars}</span>` : ""}
+                    ${project.forks > 0 ? `<span class="stat">🍴 ${project.forks}</span>` : ""}
                     <span class="stat">📝 ${project.language}</span>
                 </div>
 
@@ -198,16 +189,6 @@ class ProjectsSection extends HTMLElement {
 
     cards.forEach((card) => observer.observe(card));
 
-    // Add hover effects
-    cards.forEach((card) => {
-      card.addEventListener("mouseenter", () => {
-        card.style.transform = "translateY(-8px) scale(1.02)";
-      });
-
-      card.addEventListener("mouseleave", () => {
-        card.style.transform = "translateY(-8px) scale(1)";
-      });
-    });
   }
 }
 

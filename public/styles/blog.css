@@ -2,7 +2,7 @@
 
 /* Blog page layout */
 .blog-page {
-  padding-top: 100px;
+  padding-top: calc(var(--nav-height) + var(--space-3xl));
   padding-bottom: var(--space-4xl);
   min-height: 100vh;
 }
@@ -409,10 +409,6 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .blog-page {
-    padding-top: 80px;
-  }
-
   .blog-header h1 {
     font-size: var(--font-size-2xl);
   }

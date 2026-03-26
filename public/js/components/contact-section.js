@@ -23,13 +23,6 @@ class ContactSection extends HTMLElement {
                                 <span class="contact-value">Israel</span>
                             </div>
                         </div>
-                        <div class="contact-method">
-                            <span class="contact-icon">⏰</span>
-                            <div class="contact-details">
-                                <span class="contact-label">Response Time</span>
-                                <span class="contact-value">Usually within 24 hours</span>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="social-links">
@@ -58,20 +51,7 @@ class ContactSection extends HTMLElement {
         `;
   }
 
-  setupInteractions() {
-    // Add hover effects for contact methods
-    const contactMethods = this.querySelectorAll(".contact-method");
-    contactMethods.forEach((method) => {
-      method.addEventListener("mouseenter", () => {
-        method.style.transform = "translateY(-4px) scale(1.02)";
-      });
-
-      method.addEventListener("mouseleave", () => {
-        method.style.transform = "translateY(-4px) scale(1)";
-      });
-    });
-
-  }
+  setupInteractions() {}
 
   getSocialLinks() {
     return [

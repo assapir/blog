@@ -10,6 +10,15 @@ class NavHeader extends HTMLElement {
     this.setupScrollEffect();
   }
 
+  disconnectedCallback() {
+    if (this._scrollHandler) {
+      window.removeEventListener("scroll", this._scrollHandler);
+    }
+    if (this._sectionObserver) {
+      this._sectionObserver.disconnect();
+    }
+  }
+
   get isHomePage() {
     const path = window.location.pathname;
     return path === "/" || path === "/index.html";
@@ -77,23 +86,30 @@ class NavHeader extends HTMLElement {
 
   setupScrollEffect() {
     let lastScrollY = window.scrollY;
+    let wasScrolled = false;
+    let wasHidden = false;
 
-    window.addEventListener("scroll", () => {
+    this._scrollHandler = () => {
       const currentScrollY = window.scrollY;
 
-      // Add/remove scrolled class based on scroll position
-      this.classList.toggle("scrolled", currentScrollY > 50);
+      const shouldBeScrolled = currentScrollY > 50;
+      if (shouldBeScrolled !== wasScrolled) {
+        this.classList.toggle("scrolled", shouldBeScrolled);
+        wasScrolled = shouldBeScrolled;
+      }
 
-      // Hide/show navbar on scroll (home page only — don't hide while reading blog posts)
       if (this.isHomePage) {
-        this.classList.toggle(
-          "nav-hidden",
-          currentScrollY > lastScrollY && currentScrollY > 100
-        );
+        const shouldBeHidden = currentScrollY > lastScrollY && currentScrollY > 100;
+        if (shouldBeHidden !== wasHidden) {
+          this.classList.toggle("nav-hidden", shouldBeHidden);
+          wasHidden = shouldBeHidden;
+        }
       }
 
       lastScrollY = currentScrollY;
-    });
+    };
+
+    window.addEventListener("scroll", this._scrollHandler);
   }
 
   setupIntersectionObserver() {
@@ -102,7 +118,7 @@ class NavHeader extends HTMLElement {
     );
     const navLinks = this.querySelectorAll(".nav-link");
 
-    const observer = new IntersectionObserver(
+    this._sectionObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -125,7 +141,7 @@ class NavHeader extends HTMLElement {
       }
     );
 
-    sections.forEach((section) => observer.observe(section));
+    sections.forEach((section) => this._sectionObserver.observe(section));
   }
 
   getSectionId(tagName) {

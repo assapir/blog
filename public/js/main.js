@@ -14,6 +14,7 @@ class App {
   }
 
   setupApp() {
+    this.navHeader = document.querySelector("nav-header");
     this.setupSmoothScrolling();
     this.setupAccessibility();
     this.handleInitialHash();
@@ -35,15 +36,20 @@ class App {
     // Wait for Web Components to render, then smooth-scroll to the target
     requestAnimationFrame(() => {
       setTimeout(() => {
-        const targetElement = document.getElementById(hash.substring(1));
-        if (targetElement) {
-          const navHeight =
-            document.querySelector("nav-header").offsetHeight;
-          const targetPosition = targetElement.offsetTop - navHeight - 20;
-          window.scrollTo({ top: targetPosition, behavior: "smooth" });
-        }
+        this.scrollToElement(hash.substring(1));
         history.scrollRestoration = previousRestoration || "auto";
       }, 100);
+    });
+  }
+
+  scrollToElement(targetId, smooth = true) {
+    const targetElement = document.getElementById(targetId);
+    if (!targetElement) return;
+    const navHeight = this.navHeader?.offsetHeight ?? 60;
+    const targetPosition = targetElement.offsetTop - navHeight - 20;
+    window.scrollTo({
+      top: targetPosition,
+      behavior: smooth ? "smooth" : "instant",
     });
   }
 
@@ -53,18 +59,21 @@ class App {
       const link = e.target.closest('a[href^="#"]');
       if (link) {
         const targetId = link.getAttribute("href").substring(1);
-        const targetElement = document.getElementById(targetId);
-
-        if (targetElement) {
+        if (document.getElementById(targetId)) {
           e.preventDefault();
-          const navHeight = document.querySelector("nav-header").offsetHeight;
-          const targetPosition = targetElement.offsetTop - navHeight - 20;
-
-          window.scrollTo({
-            top: targetPosition,
-            behavior: "smooth",
-          });
+          history.pushState(null, "", `#${targetId}`);
+          this.scrollToElement(targetId);
         }
+      }
+    });
+
+    // Handle back/forward navigation
+    window.addEventListener("popstate", () => {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        this.scrollToElement(hash, false);
+      } else {
+        window.scrollTo({ top: 0, behavior: "instant" });
       }
     });
   }
@@ -96,22 +105,20 @@ class App {
       // Alt + H: Go to home
       if (e.altKey && e.key === "h") {
         e.preventDefault();
-        document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+        this.scrollToElement("home");
       }
 
       // Alt + C: Go to contact
       if (e.altKey && e.key === "c") {
         e.preventDefault();
-        document
-          .getElementById("contact")
-          ?.scrollIntoView({ behavior: "smooth" });
+        this.scrollToElement("contact");
       }
 
       // Escape: Close mobile menu
       if (e.key === "Escape") {
-        const navLinks = document.querySelector("#navLinks");
+        const navLinks = this.navHeader?.querySelector("#navLinks");
         if (navLinks?.classList.contains("active")) {
-          document.querySelector("#mobileMenuBtn")?.click();
+          this.navHeader?.querySelector("#mobileMenuBtn")?.click();
         }
       }
     });
