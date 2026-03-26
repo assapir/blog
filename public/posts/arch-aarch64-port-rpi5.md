@@ -8,7 +8,7 @@ First things first: despite living under `archlinux.page`, this port is **not of
 
 I went and checked the official Arch mirrors — `geo.mirror.pkgbuild.com` and friends — and sure enough, there's no `aarch64` directory on any of them. Only `x86_64`. So much for "official."
 
-The whole thing lives on a **single repo** run by one person (bschnei) on AWS S3 at `arch-linux-repo.drzee.net`. Three repos:
+The whole thing lives on a **single repo** run by one person ([bschnei](https://gitlab.archlinux.org/bschnei)) on AWS S3 at `arch-linux-repo.drzee.net`. Three repos:
 
 - **core** — 264 packages
 - **extra** — 13,326 packages
