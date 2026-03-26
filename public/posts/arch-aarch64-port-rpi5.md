@@ -50,9 +50,9 @@ The `[forge]` repo has the basics:
 - `rpi5-eeprom` — EEPROM bootloader updates
 - `raspberrypi-utils` — vcgencmd and other Pi tools
 
-But there's a gap: **no `raspberrypi-bootloader` package**. That provides `start4.elf` and `fixup4.dat` — the boot firmware the RPi 5 EEPROM needs to, you know, boot. Without them you get a cheerful `Firmware (start*.elf) not found` fatal error. On ALARM these just come with the system. Here, you get to manually download them from the [raspberrypi/firmware](https://github.com/raspberrypi/firmware) GitHub repo like it's 2012.
+There is no `raspberrypi-bootloader` package in the drzee repos, which made me assume I'd have to manually provide `start4.elf` and `fixup4.dat`. That turned out to be wrong — on my RPi 5, with current EEPROM firmware, the system booted fine without downloading anything extra. So either the firmware path is a little smarter than I expected, or I was just confidently wrong for most of the day.
 
-The good news: the [`linux-rpi5` package](https://github.com/bschnei/linux-rpi5) handles everything else — DTBs, overlays, and it even auto-generates `config.txt` and `cmdline.txt` on first install. So it's really just those two files. Could be worse.
+The good news is still the same: the [`linux-rpi5` package](https://github.com/bschnei/linux-rpi5) handles DTBs, overlays, and even auto-generates `config.txt` and `cmdline.txt` on first install. Which is nice, because by that point I was done manually creating boot files.
 
 Also worth noting: ALARM's `linux-rpi-16k` uses 16KB pages, which is better for RPi 5 performance. The drzee kernel uses 4KB. Progress!
 
@@ -62,7 +62,7 @@ Also worth noting: ALARM's `linux-rpi-16k` uses 16KB pages, which is better for 
 |---|---|---|
 | Status | Established, been around for years | Unofficial, no RFC, vibes-based |
 | Mirrors | ~10 worldwide | One S3 bucket |
-| RPi 5 support | First-class | Good — just missing two boot files |
+| RPi 5 support | First-class | Good — kernel package handles almost everything |
 | Package freshness | Same as upstream right now | Same, rebuilt independently |
 | Build model | ARM-patched fork of Arch | Straight upstream rebuild |
 | Risk | Might lag on big toolchain bumps | One person, one host, one `aws s3 rm` away from gone |
@@ -81,7 +81,7 @@ The one other gotcha worth mentioning: the bootstrap tarball ships with root **l
 
 ## Installing on a Real Raspberry Pi 5
 
-If you want to try this on actual hardware, I wrote a [step-by-step guide](https://gist.github.com/assapir/bfb047ac1abc1d1adf112b7bdbdef2d5). It's actually simpler than the VM — the RPi firmware handles booting, so no GRUB/systemd-boot drama. You install `linux-rpi5` from `[forge]`, which auto-generates the boot config. The only manual step is downloading `start4.elf` and `fixup4.dat` from GitHub.
+If you want to try this on actual hardware, I wrote a [step-by-step guide](https://gist.github.com/assapir/bfb047ac1abc1d1adf112b7bdbdef2d5). It's actually simpler than the VM — the RPi firmware handles booting, so no GRUB/systemd-boot drama. You install `linux-rpi5` from `[forge]`, it auto-generates the boot config, and at least on my Pi 5 I didn't need to download any extra firmware files.
 
 ## So Should You Switch?
 
