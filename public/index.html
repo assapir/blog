@@ -31,6 +31,12 @@
   <meta name="twitter:description" content="Software Developer from Israel. Passionate about open source, JavaScript, TypeScript, and modern web technologies.">
   <meta name="twitter:image" content="https://sapir.io/images/og-image.png">
 
+  <link rel="preconnect" href="https://api.github.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="modulepreload" href="js/components/nav-header.js">
+  <link rel="modulepreload" href="js/components/hero-section.js">
+  <link rel="modulepreload" href="js/main.js">
+
   <link rel="alternate" type="application/atom+xml" title="Assaf Sapir's Blog" href="/feed.xml">
 
   <script type="application/ld+json">
@@ -55,10 +61,45 @@
 
 <body>
   <a href="#main-content" class="skip-to-content">Skip to content</a>
-  <nav-header></nav-header>
+  <nav-header>
+    <div class="nav-container">
+      <a href="#home" class="logo">Assaf Sapir</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+        <span id="menuIcon">☰</span>
+      </button>
+    </div>
+  </nav-header>
 
   <main role="main" aria-label="Main content" id="main-content">
-    <hero-section></hero-section>
+    <hero-section id="home">
+      <div class="hero-container container">
+        <div class="hero-content">
+          <h1 class="animate-fade-in-up">
+            <span style="color: var(--text-primary);">Hi, I'm</span> <span style="color: var(--primary-blue);">Assaf Sapir</span>
+          </h1>
+          <p class="subtitle animate-fade-in-up" style="animation-delay: 0.2s;">
+            I write code and mass-produce opinions
+          </p>
+          <p class="description animate-fade-in-up" style="animation-delay: 0.4s;">
+            Software developer from Israel. I build things for the web
+            and mass opinions about things that don't matter.
+          </p>
+          <div class="hero-actions animate-fade-in-up" style="animation-delay: 0.6s;">
+            <a href="#projects" class="btn btn-secondary">View My Work</a>
+            <a href="/blog/" class="btn btn-secondary">Read My Opinions</a>
+            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+          </div>
+        </div>
+      </div>
+    </hero-section>
 
     <about-section></about-section>
 
@@ -69,7 +110,16 @@
     <contact-section></contact-section>
   </main>
 
-  <footer-component></footer-component>
+  <footer-component>
+    <div class="footer-content">
+      <p>&copy; 2026 Assaf Sapir. Built with ❤️ using vanilla JavaScript, Web Components and vibe coding.</p>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/uses/">Uses</a>
+        <a href="/feed.xml" rel="alternate" type="application/atom+xml">RSS</a>
+      </nav>
+      <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+    </div>
+  </footer-component>
 
   <script type="module" src="js/services/github-api.js"></script>
   <script type="module" src="js/components/nav-header.js"></script>

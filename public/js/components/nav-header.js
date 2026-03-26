@@ -5,7 +5,6 @@ class NavHeader extends HTMLElement {
   }
 
   connectedCallback() {
-    this.render();
     this.setupEventListeners();
     this.setupScrollEffect();
   }
@@ -22,30 +21,6 @@ class NavHeader extends HTMLElement {
   get isHomePage() {
     const path = window.location.pathname;
     return path === "/" || path === "/index.html";
-  }
-
-  render() {
-    const prefix = this.isHomePage ? "" : "/";
-    const blogActive = window.location.pathname.startsWith("/blog") ? " active" : "";
-    const logoHref = this.isHomePage ? "#home" : "/";
-    this.innerHTML = `
-            <div class="nav-container">
-                <a href="${logoHref}" class="logo">Assaf Sapir</a>
-
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="${prefix}#home" class="nav-link${this.isHomePage ? " active" : ""}">Home</a></li>
-                    <li><a href="${prefix}#about" class="nav-link">About</a></li>
-                    <li><a href="${prefix}#projects" class="nav-link">Projects</a></li>
-                    <li><a href="${prefix}#skills" class="nav-link">Skills</a></li>
-                    <li><a href="/blog/" class="nav-link${blogActive}">Blog</a></li>
-                    <li><a href="${prefix}#contact" class="nav-link">Contact</a></li>
-                </ul>
-
-                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
-                    <span id="menuIcon">☰</span>
-                </button>
-            </div>
-        `;
   }
 
   setupEventListeners() {
