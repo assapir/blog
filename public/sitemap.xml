@@ -11,12 +11,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sapir.io/blog/#arch-aarch64-port-rpi5</loc>
-    <lastmod>2026-03-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://sapir.io/uses/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
