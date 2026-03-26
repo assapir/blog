@@ -8,7 +8,7 @@ First things first: despite living under `archlinux.page`, this port is **not of
 
 I went and checked the official Arch mirrors — `geo.mirror.pkgbuild.com` and friends — and sure enough, there's no `aarch64` directory on any of them. Only `x86_64`. So much for "official."
 
-The whole thing lives on a **single repo** run by one person ([bschnei](https://gitlab.archlinux.org/bschnei)) on AWS S3 at `arch-linux-repo.drzee.net`. Three repos:
+The whole thing is distributed through the community-run `drzee.net` infrastructure on AWS S3. One visible contributor here is [bschnei](https://gitlab.archlinux.org/bschnei), who maintains the `linux-rpi5` package. Three repos:
 
 - **core** — 264 packages
 - **extra** — 13,326 packages
@@ -98,7 +98,7 @@ If you want to try this on actual hardware, I wrote a [step-by-step guide](https
 
 ## So Should You Switch?
 
-Honestly? **No.** Not yet. The packages are the same versions, ALARM's RPi 5 support is more complete, and you get real mirrors instead of one person's S3 bucket. Swapping would give you zero tangible benefit today and introduce a single point of failure for your package updates.
+Honestly? **No.** Not yet. The packages are the same versions, ALARM's RPi 5 support is more complete, and you get real mirrors instead of a community-run single-bucket setup. Swapping would give you zero tangible benefit today and introduce a single point of failure for your package updates.
 
 But I'm keeping an eye on this. The `linux-rpi5` package explicitly replaces `linux-rpi-16k`, the PKGBUILD is well-maintained, and the intent is clearly to be a drop-in ALARM replacement. If an RFC gets approved and this moves onto official Arch infrastructure with proper mirrors and multiple maintainers, it becomes the obvious choice.
 
