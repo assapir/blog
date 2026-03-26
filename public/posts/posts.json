@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "title": "Arch Linux on Raspberry Pi 5: ALARM vs the Official aarch64 Port",
+    "slug": "arch-aarch64-port-rpi5",
+    "date": "2026-03-25",
+    "description": "Comparing Arch Linux ARM with the unofficial aarch64 port at ports.archlinux.page — package versions, RPi 5 support gaps, and a step-by-step guide to building a bootable VM image for UTM.",
+    "tags": ["arch-linux", "raspberry-pi", "arm64", "linux"]
+  }
+]

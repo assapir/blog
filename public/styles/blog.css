@@ -222,6 +222,30 @@
   margin: var(--space-3xl) 0;
 }
 
+.blog-post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-lg);
+  font-size: var(--font-size-sm);
+}
+
+.blog-post-content th,
+.blog-post-content td {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.blog-post-content th {
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.blog-post-content tr:nth-child(even) {
+  background-color: var(--background-secondary);
+}
+
 /* Back navigation */
 .blog-back {
   display: inline-flex;

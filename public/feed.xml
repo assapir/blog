@@ -5,9 +5,16 @@
   <link href="https://sapir.io/blog/"/>
   <link rel="self" href="https://sapir.io/feed.xml"/>
   <id>https://sapir.io/blog/</id>
-  <updated>2026-03-06T00:00:00Z</updated>
+  <updated>2026-03-25T00:00:00Z</updated>
   <author>
     <name>Assaf Sapir</name>
     <uri>https://sapir.io</uri>
   </author>
+  <entry>
+    <title>Arch Linux on Raspberry Pi 5: ALARM vs the Official aarch64 Port</title>
+    <link href="https://sapir.io/blog/#arch-aarch64-port-rpi5"/>
+    <id>https://sapir.io/blog/#arch-aarch64-port-rpi5</id>
+    <updated>2026-03-25T00:00:00Z</updated>
+    <summary>Comparing Arch Linux ARM with the unofficial aarch64 port at ports.archlinux.page — package versions, RPi 5 support gaps, and a step-by-step guide to building a bootable VM image for UTM.</summary>
+  </entry>
 </feed>
