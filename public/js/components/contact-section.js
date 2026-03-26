@@ -39,7 +39,7 @@ class ContactSection extends HTMLElement {
 
   createSocialLink(link) {
     const iconContent = link.image
-      ? `<img src="${link.image}" alt="${link.label} icon" />`
+      ? `<img src="${link.image}" alt="${link.label} icon" loading="lazy" />`
       : link.icon;
 
     return `

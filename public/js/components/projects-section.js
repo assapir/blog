@@ -10,8 +10,15 @@ class ProjectsSection extends HTMLElement {
 
   async connectedCallback() {
     this.render();
-    await this.loadProjects();
-    this.setupInteractions();
+    const load = async () => {
+      await this.loadProjects();
+      this.setupInteractions();
+    };
+    if (typeof requestIdleCallback === 'function') {
+      requestIdleCallback(() => load());
+    } else {
+      setTimeout(() => load(), 0);
+    }
   }
 
   render() {
