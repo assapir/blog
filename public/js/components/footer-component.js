@@ -10,6 +10,7 @@ class FooterComponent extends HTMLElement {
                 <p>&copy; ${new Date().getFullYear()} Assaf Sapir. Built with ❤️ using vanilla JavaScript, Web Components and vibe coding.</p>
                 <nav class="footer-links" aria-label="Footer navigation">
                     <a href="/uses/">Uses</a>
+                    <a href="/feed.xml" rel="alternate" type="application/atom+xml">RSS</a>
                 </nav>
                 <button class="back-to-top" id="backToTop" aria-label="Back to top">
                     ↑
