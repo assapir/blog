@@ -515,6 +515,18 @@ contact-section {
   margin-right: auto;
 }
 
+.contact-location {
+  display: inline-block;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  background-color: var(--background-primary);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color);
+  margin-top: var(--space-xl);
+  margin-bottom: 0;
+}
+
 .contact-methods {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

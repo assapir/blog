@@ -15,21 +15,13 @@ class ContactSection extends HTMLElement {
                         I'd love to hear from you!
                     </p>
 
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <span class="contact-icon">📍</span>
-                            <div class="contact-details">
-                                <span class="contact-label">Location</span>
-                                <span class="contact-value">Israel</span>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="social-links">
                         ${this.getSocialLinks()
                           .map((link) => this.createSocialLink(link))
                           .join("")}
                     </div>
+
+                    <p class="contact-location">📍 Based in Israel · UTC${this.getTimezoneOffset()}</p>
                 </div>
             </div>
         `;
@@ -88,6 +80,22 @@ class ContactSection extends HTMLElement {
         url: "mailto:assaf@sapir.io",
       },
     ];
+  }
+
+  getTimezoneOffset() {
+    try {
+      const offset = Temporal.Now.zonedDateTimeISO("Asia/Jerusalem").offset;
+      const hours = parseInt(offset);
+      return (hours >= 0 ? "+" : "") + hours;
+    } catch {
+      const formatter = new Intl.DateTimeFormat("en", {
+        timeZone: "Asia/Jerusalem",
+        timeZoneName: "shortOffset",
+      });
+      const parts = formatter.formatToParts(new Date());
+      const gmt = parts.find((p) => p.type === "timeZoneName")?.value || "GMT+2";
+      return gmt.replace("GMT", "");
+    }
   }
 }
 
