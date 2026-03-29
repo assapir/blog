@@ -145,19 +145,21 @@ class ProjectsSection extends HTMLElement {
 
                 <p>${project.description}</p>
 
-                <div class="project-tech" role="list" aria-label="Technologies used">
-                    ${project.technologies
-                      .map(
-                        (tech) =>
-                          `<span class="tech-tag" role="listitem">${tech}</span>`
-                      )
-                      .join("")}
-                </div>
+                <div class="project-footer">
+                    <div class="project-tech" role="list" aria-label="Technologies used">
+                        ${project.technologies
+                          .map(
+                            (tech) =>
+                              `<span class="tech-tag" role="listitem">${tech}</span>`
+                          )
+                          .join("")}
+                    </div>
 
-                <div class="project-stats">
-                    ${project.stars > 0 ? `<span class="stat">⭐ ${project.stars}</span>` : ""}
-                    ${project.forks > 0 ? `<span class="stat">🍴 ${project.forks}</span>` : ""}
-                    <span class="stat">📝 ${project.language}</span>
+                    <div class="project-stats">
+                        ${project.stars > 0 ? `<span class="stat">⭐ ${project.stars}</span>` : ""}
+                        ${project.forks > 0 ? `<span class="stat">🍴 ${project.forks}</span>` : ""}
+                        <span class="stat">📝 ${project.language}</span>
+                    </div>
                 </div>
 
                 <div class="project-links">

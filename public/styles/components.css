@@ -245,6 +245,10 @@ projects-section .project-card p {
   line-height: 1.6;
 }
 
+projects-section .project-footer {
+  margin-top: auto;
+}
+
 projects-section .project-tech {
   display: flex;
   flex-wrap: wrap;
@@ -264,7 +268,6 @@ projects-section .tech-tag {
 projects-section .project-links {
   display: flex;
   gap: var(--space-md);
-  margin-top: auto;
   padding-top: var(--space-lg);
 }
 
