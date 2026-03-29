@@ -15,7 +15,7 @@ class ProjectsSection extends HTMLElement {
       this.setupInteractions();
     };
     if (typeof requestIdleCallback === 'function') {
-      requestIdleCallback(() => load());
+      requestIdleCallback(() => load(), { timeout: 2000 });
     } else {
       setTimeout(() => load(), 0);
     }

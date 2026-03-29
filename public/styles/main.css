@@ -49,7 +49,7 @@
   /* Layout */
   --nav-height: 60px;
   --container-max-width: 1200px;
-  --section-padding: var(--space-4xl) var(--space-xl);
+  --section-padding: var(--space-3xl) var(--space-xl) var(--space-4xl);
   --border-radius: 12px;
   --border-radius-sm: 8px;
   --border-radius-lg: 16px;
