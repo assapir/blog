@@ -125,28 +125,13 @@ class App {
   }
 
   logWelcomeMessage() {
-    // Fun console message for developers who inspect the code
-    console.log(`
-    ╔══════════════════════════════════════════════════════════════╗
-    ║                                                              ║
-    ║    👋 Hello there, fellow developer!                         ║
-    ║                                                              ║
-    ║    Welcome to Assaf Sapir's personal website.                ║
-    ║    Built with vanilla JavaScript Web Components and          ║
-    ║    Vibe coding with CoPilot and Claude Sonnet 4.             ║
-    ║                                                              ║
-    ║    🚀 Modern, accessible, and performance-focused            ║
-    ║    🎨 Clean design with CSS Grid and Flexbox                 ║
-    ║    📱 Fully responsive and mobile-friendly                   ║
-    ║    ⚡ Progressive enhancement and SEO optimized               ║
-    ║                                                              ║
-    ║    Interested in the code? Check it out on GitHub:           ║
-    ║    https://github.com/assapir/blog                           ║
-    ║                                                              ║
-    ║    Let's connect and build something amazing together! 🤝    ║
-    ║                                                              ║
-    ╚══════════════════════════════════════════════════════════════╝
-        `);
+    console.log(
+      "%cHi, I'm Assaf Sapir%c\n" +
+      "I write code and mass-produce opinions.\n\n" +
+      "Source: https://github.com/assapir/blog",
+      "font-size: 16px; font-weight: bold; color: #4a9eff;",
+      "font-size: 12px; color: inherit;"
+    );
   }
 }
 
