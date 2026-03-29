@@ -217,6 +217,8 @@ projects-section .projects-grid {
 }
 
 projects-section .project-card {
+  display: flex;
+  flex-direction: column;
   background-color: var(--background-primary);
   border-radius: var(--border-radius);
   padding: var(--space-xl);
@@ -262,6 +264,8 @@ projects-section .tech-tag {
 projects-section .project-links {
   display: flex;
   gap: var(--space-md);
+  margin-top: auto;
+  padding-top: var(--space-lg);
 }
 
 /* Skills Section */
