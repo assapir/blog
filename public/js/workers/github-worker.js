@@ -55,10 +55,46 @@ function transformRepository(repo) {
   };
 }
 
+const CACHE_NAME = "github-repos";
+const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+
+async function getCached() {
+  try {
+    const cache = await caches.open(CACHE_NAME);
+    const response = await cache.match("repos");
+    if (!response) return null;
+    const { data, timestamp } = await response.json();
+    if (Date.now() - timestamp > CACHE_TTL) {
+      await cache.delete("repos");
+      return null;
+    }
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+async function setCache(data) {
+  try {
+    const cache = await caches.open(CACHE_NAME);
+    const response = new Response(
+      JSON.stringify({ data, timestamp: Date.now() }),
+      { headers: { "Content-Type": "application/json" } }
+    );
+    await cache.put("repos", response);
+  } catch {}
+}
+
 self.onmessage = async function (e) {
   const { username, limit } = e.data;
 
   try {
+    const cached = await getCached();
+    if (cached) {
+      self.postMessage({ type: "success", data: cached });
+      return;
+    }
+
     const url =
       `https://api.github.com/users/${username}/repos?` +
       `sort=updated&direction=desc&per_page=50&type=owner`;
@@ -87,6 +123,7 @@ self.onmessage = async function (e) {
       .slice(0, limit)
       .map(transformRepository);
 
+    await setCache(featured);
     self.postMessage({ type: "success", data: featured });
   } catch (error) {
     self.postMessage({ type: "error", message: error.message });

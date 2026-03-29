@@ -1,19 +1,11 @@
 class GitHubApiService {
   constructor() {
     this.username = "assapir";
-    this.cacheKey = "github-repos-cache";
-    this.cacheExpiry = 10 * 60 * 1000; // 10 minutes
   }
 
   async getFeaturedRepositories(limit = 6) {
-    // Check cache first (localStorage is main-thread only)
-    const cached = this.getCachedData();
-    if (cached) return cached;
-
     try {
-      const repos = await this.fetchViaWorker(limit);
-      this.setCachedData(repos);
-      return repos;
+      return await this.fetchViaWorker(limit);
     } catch (error) {
       console.error("Failed to get featured repositories:", error);
       return this.getFallbackRepositories();
@@ -37,30 +29,6 @@ class GitHubApiService {
       };
       worker.postMessage({ username: this.username, limit });
     });
-  }
-
-  getCachedData() {
-    try {
-      const cached = localStorage.getItem(this.cacheKey);
-      if (!cached) return null;
-      const { data, timestamp } = JSON.parse(cached);
-      if (Date.now() - timestamp > this.cacheExpiry) {
-        localStorage.removeItem(this.cacheKey);
-        return null;
-      }
-      return data;
-    } catch {
-      return null;
-    }
-  }
-
-  setCachedData(data) {
-    try {
-      localStorage.setItem(
-        this.cacheKey,
-        JSON.stringify({ data, timestamp: Date.now() })
-      );
-    } catch {}
   }
 
   getFallbackRepositories() {
