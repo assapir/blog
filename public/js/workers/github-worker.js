@@ -27,14 +27,6 @@ function formatTechnology(topic) {
   );
 }
 
-function getRepositoryStatus(repo) {
-  if (repo.archived) return "archived";
-  const lastUpdate = new Date(repo.updated_at);
-  const sixMonthsAgo = new Date();
-  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-  return lastUpdate > sixMonthsAgo ? "active" : "maintained";
-}
-
 function transformRepository(repo) {
   return {
     id: repo.name.toLowerCase().replace(/[^a-z0-9]/g, "-"),
@@ -47,11 +39,8 @@ function transformRepository(repo) {
     language: repo.language || "Unknown",
     stars: repo.stargazers_count || 0,
     forks: repo.forks_count || 0,
-    status: getRepositoryStatus(repo),
     github: repo.html_url,
     demo: repo.homepage || null,
-    updated: repo.updated_at,
-    created: repo.created_at,
   };
 }
 
@@ -61,15 +50,16 @@ const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
 async function getCached() {
   try {
     const cache = await caches.open(CACHE_NAME);
-    const response = await cache.match("repos");
+    const response = await cache.match("https://cache.internal/github-repos");
     if (!response) return null;
     const { data, timestamp } = await response.json();
     if (Date.now() - timestamp > CACHE_TTL) {
-      await cache.delete("repos");
+      await cache.delete("https://cache.internal/github-repos");
       return null;
     }
     return data;
-  } catch {
+  } catch (e) {
+    console.warn("Cache read failed:", e);
     return null;
   }
 }
@@ -81,8 +71,10 @@ async function setCache(data) {
       JSON.stringify({ data, timestamp: Date.now() }),
       { headers: { "Content-Type": "application/json" } }
     );
-    await cache.put("repos", response);
-  } catch {}
+    await cache.put("https://cache.internal/github-repos", response);
+  } catch (e) {
+    console.warn("Cache write failed:", e);
+  }
 }
 
 self.onmessage = async function (e) {
