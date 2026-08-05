@@ -25,24 +25,19 @@ The name means nothing, by the way. "Quilon" is a made-up word that sounded funn
 
 Worth clearing up, since "no keywords" tends to be heard as "no control flow": everything you'd expect is there, it's just punctuation. Branching is `?`, either as a ternary or as a match with `|` arms. Looping is `for n <- xs => body`, which is the one place a word survived, and I'm not thrilled about it. Nothing was removed from the language; the words were.
 
-Here's the vocabulary, such as it is.
+The bindings and arrows are unremarkable once you've seen them once (`=`, `:=`, `::`, `=>`, `->`). These are the ones that make people stop:
 
 | Symbol | Meaning | Example |
 |---|---|---|
-| `=` | Immutable binding | `x = 42` |
-| `:=` | Mutable bind / reassign | `counter := 0` |
-| `::` | Type annotation | `x :: Num` |
-| `=>` | Function body / match arm | `f = x => x + 1` |
-| `->` | Return type | `f = x -> Num => x` |
 | `^` | Entry point | `^ = () -> Num => 0` |
-| `<<` / `>>` | Import / export | `<< core.io` |
-| `\|>` | Pipe, first-arg injection | `x \|> f(a)` ≡ `f(x, a)` |
-| `? :` | Ternary | `x < 0 ? -x : x` |
-| `?` `\|` | Pattern match | `v ? \| 0 => "zero" \| _ => "other"` |
-| `~` | Comment | `~ a note` |
 | `$` | Unit: the type *and* its only value | `f = () -> $ => $` |
+| `~` | Comment | `~ a note` |
+| `<<` / `>>` | Import / export | `<< core.io` |
+| `?` `\|` | Pattern match | `v ? \| 0 => "zero" \| _ => "other"` |
 
-Two of those are genuinely hostile and I'm keeping them. `<` and `>` are block delimiters *and* comparison operators, so the parser has to work out which one you meant. And `/` is division as well as the sum-type separator:
+The full set, all sixteen of them, is in [LANGUAGE.md](https://github.com/assapir/quilon/blob/main/LANGUAGE.md).
+
+Two more are genuinely hostile and I'm keeping them. `<` and `>` are block delimiters *and* comparison operators, so the parser has to work out which one you meant. And `/` is division as well as the sum-type separator:
 
 ```quilon
 ~ A nullary enum.
