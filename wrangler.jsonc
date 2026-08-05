@@ -6,7 +6,15 @@
 	"assets": {
 		"directory": "./public",
 		"binding": "ASSETS",
-		"run_worker_first": ["/blog", "/blog/*", "/sitemap.xml", "/feed.xml"]
+		"run_worker_first": [
+			"/",
+			"/uses",
+			"/uses/*",
+			"/blog",
+			"/blog/*",
+			"/sitemap.xml",
+			"/feed.xml"
+		]
 	},
 	"observability": {
 		"enabled": true

@@ -63,7 +63,10 @@ async function renderShell(env, url, meta, body, status = 200) {
     })
     .on("blog-page", {
       element(element) {
-        element.setInnerContent(body, { html: true });
+        element.setInnerContent(
+          `<div class="blog-page container"><div id="blogContent">${body}</div></div>`,
+          { html: true }
+        );
       },
     })
     .transform(shell);
