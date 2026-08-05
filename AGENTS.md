@@ -65,8 +65,9 @@ customElements.define("component-name", ComponentName);
 
 ## Build & Dev Commands
 ```bash
-npx wrangler dev        # Local development server
-npx wrangler deploy     # Deploy to Cloudflare Workers (requires wrangler login)
+pnpm install            # Install dependencies — pnpm only, pnpm-lock.yaml is the lockfile
+pnpm dev                # Local development server
+pnpm deploy             # Deploy to Cloudflare Workers (requires wrangler login)
 ```
 
 ## Deployment

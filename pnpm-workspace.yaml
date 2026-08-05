@@ -1,0 +1,5 @@
+allowBuilds:
+  # Cloudflare's toolchain — both link a platform binary on install,
+  # and wrangler will not run without them.
+  esbuild: true
+  workerd: true

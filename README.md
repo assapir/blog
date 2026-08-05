@@ -54,23 +54,23 @@ A modern, responsive personal website built with vanilla JavaScript, Web Compone
    cd blog
    ```
 
-2. **Serve locally**:
+2. **Install dependencies** (pnpm — `pnpm-lock.yaml` is the lockfile):
 
    ```bash
-   # Using Python 3
-   python -m http.server 8002 --directory public
-
-   # Using Node.js (serve the public directory)
-   npx serve -s public -l 8002
-
-   # Using PHP
-   cd public && php -S localhost:8002
-
-   # Using Cloudflare Workers (for development)
-   npx wrangler dev
+   pnpm install
    ```
 
-3. **Open in browser**:
+3. **Serve locally**:
+
+   ```bash
+   # Cloudflare Workers, the way it runs in production
+   pnpm dev
+
+   # Or any static server — public/ has no build step
+   python -m http.server 8002 --directory public
+   ```
+
+4. **Open in browser**:
    ```
    http://localhost:8002
    ```
@@ -79,15 +79,14 @@ A modern, responsive personal website built with vanilla JavaScript, Web Compone
 
 This project is configured for deployment on Cloudflare Workers:
 
-1. **Install Wrangler CLI**:
+1. **Authenticate wrangler** (once per machine):
    ```bash
-   # Using npx (no global installation needed)
-   npx wrangler login
+   pnpm exec wrangler login
    ```
 
 2. **Deploy to Cloudflare Workers**:
    ```bash
-   npx wrangler deploy
+   pnpm deploy
    ```
 
 3. **Configure custom domain** (optional):
