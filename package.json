@@ -2,11 +2,14 @@
   "name": "personal-blog-worker",
   "version": "1.0.0",
   "description": "Personal blog deployed on Cloudflare Workers",
-  "main": "worker.js",
+  "main": "src/index.js",
   "scripts": {
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "preview": "wrangler dev --remote"
+  },
+  "dependencies": {
+    "marked": "^15.0.12"
   },
   "devDependencies": {
     "wrangler": "^4.118.0"

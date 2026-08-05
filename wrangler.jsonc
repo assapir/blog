@@ -2,19 +2,22 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "personal-website",
 	"compatibility_date": "2025-06-06",
+	"main": "src/index.js",
 	"assets": {
-		"directory": "./public"
+		"directory": "./public",
+		"binding": "ASSETS",
+		"run_worker_first": ["/blog", "/blog/*", "/sitemap.xml", "/feed.xml"]
 	},
 	"observability": {
 		"enabled": true
 	},
 	"routes": [
 		{
-			"pattern": "www.sapir.io",
+			"pattern": "sapir.io",
 			"custom_domain": true
 		},
 		{
-			"pattern": "sapir.io",
+			"pattern": "www.sapir.io",
 			"custom_domain": true
 		}
 	]
