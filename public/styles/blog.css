@@ -44,6 +44,10 @@
   transition: all var(--transition-medium);
 }
 
+.blog-card[hidden] {
+  display: none;
+}
+
 .blog-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-medium);
