@@ -14,7 +14,7 @@ class AboutSection extends HTMLElement {
                             form opinions about things that don't matter.
                         </p>
                         <p>
-                            Full-stack, and not in the CV sense: TypeScript and Node on the server,
+                            Full-stack, and not in the CV sense: TypeScript and Node on the back,
                             React and Vue on the front, C++ back when the SDKs were desktop-shaped,
                             and Rust when I want to feel humble. Under most of it there's a Kubernetes
                             cluster and some Terraform I have to answer for.
