@@ -117,6 +117,8 @@ Take every object, stop being clever. There's a companion horror next door: `#[l
 
 That flag isn't free, and you can measure it. `^ = () -> Num => 42` — the whole program, one line — builds to a **6.6 MB** executable. A Rust staticlib carries the standard library with it, so the runtime archive is 23 MB before anything of mine is in it, and `--whole-archive` says take all of it rather than only the parts referenced. `strip` gets the binary down to 1.2 MB, which means most of what's left is symbols. For scale, the compiler itself is 1.9 MB — one line of Quilon produces an artifact three times the size of the thing that compiled it.
 
+Those numbers are from an aarch64 Raspberry Pi 5 running Arch — the same machine [the last post](/blog/arch-aarch64-port-rpi5/) was about — with LLVM 22.1.8, clang as the linker and libgc 8.2. On x86-64 they'll differ. Not enough to rescue anyone.
+
 Section-level garbage collection at link time would fix most of that, and I haven't done it, because right now nothing depends on the number being small and quite a lot depended on the symbol being found.
 
 ## How this actually got built
