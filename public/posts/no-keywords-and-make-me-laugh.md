@@ -6,7 +6,7 @@ Here is a complete Quilon program.
 ^ = () -> Num => 42
 ```
 
-That's it. `^` is the entry point. The `Num` it returns is the exit code. There's no `fn`, no `main`, no `return`, and before you ask: no, there is no `if` either.
+That's it. `^` is the entry point. The `Num` it returns is the exit code. There's no `fn`, no `main`, no `return`, and before you ask: no, there is no `if` either. There is branching — it's just spelled `?`.
 
 I wrote a programming language. It compiles through LLVM to a native binary, it has a type checker, a garbage collector, a CHANGELOG and a VS Code extension. It also has exactly one user. I want to talk about why, because the "why" here is dumber than you're expecting and it worked better than it had any right to.
 
@@ -25,6 +25,10 @@ The name means nothing, by the way. "Quilon" is a made-up word that sounded funn
 
 ## Everything is a symbol
 
+Worth clearing up, since "no keywords" tends to be heard as "no control flow": everything you'd expect is there, it's just punctuation. Branching is `?`, either as a ternary or as a match with `|` arms. Looping is `for n <- xs => body`, which is the one place a word survived, and I'm not thrilled about it. Nothing was removed from the language; the words were.
+
+Here's the vocabulary, such as it is.
+
 | Symbol | Meaning | Example |
 |---|---|---|
 | `=` | Immutable binding | `x = 42` |
@@ -35,6 +39,8 @@ The name means nothing, by the way. "Quilon" is a made-up word that sounded funn
 | `^` | Entry point | `^ = () -> Num => 0` |
 | `<<` / `>>` | Import / export | `<< core.io` |
 | `\|>` | Pipe, first-arg injection | `x \|> f(a)` ≡ `f(x, a)` |
+| `? :` | Ternary | `x < 0 ? -x : x` |
+| `?` `\|` | Pattern match | `v ? \| 0 => "zero" \| _ => "other"` |
 | `~` | Comment | `~ a note` |
 | `$` | Unit — the type *and* its only value | `f = () -> $ => $` |
 
