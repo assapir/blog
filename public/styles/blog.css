@@ -201,8 +201,59 @@
 }
 
 .blog-post-content code {
-  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  font-family: "Fira Code", "JetBrains Mono", "Cascadia Code", monospace;
   font-size: var(--font-size-sm);
+  font-feature-settings: "calt" 1, "liga" 1;
+}
+
+/* Quilon highlighting (see js/services/quilon-highlight.js) */
+.blog-post-content .ql-comment {
+  color: #8b949e;
+  font-style: italic;
+}
+.blog-post-content .ql-string {
+  color: #a5d6ff;
+}
+.blog-post-content .ql-number,
+.blog-post-content .ql-const {
+  color: #79c0ff;
+}
+.blog-post-content .ql-operator {
+  color: #ff7b72;
+}
+.blog-post-content .ql-control {
+  color: #ffa657;
+}
+.blog-post-content .ql-type {
+  color: #7ee787;
+}
+.blog-post-content .ql-name {
+  color: #d2a8ff;
+}
+
+@media (prefers-contrast: high) {
+  .blog-post-content .ql-comment {
+    color: #c9d1d9;
+  }
+  .blog-post-content .ql-string {
+    color: #b6e3ff;
+  }
+  .blog-post-content .ql-number,
+  .blog-post-content .ql-const {
+    color: #a2d2ff;
+  }
+  .blog-post-content .ql-operator {
+    color: #ff9d97;
+  }
+  .blog-post-content .ql-control {
+    color: #ffc08a;
+  }
+  .blog-post-content .ql-type {
+    color: #9ff0a8;
+  }
+  .blog-post-content .ql-name {
+    color: #e0c3ff;
+  }
 }
 
 .blog-post-content p code,

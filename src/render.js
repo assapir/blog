@@ -1,6 +1,18 @@
 import { marked } from "marked";
+import { highlight } from "../public/js/services/quilon-highlight.js";
 
-marked.use({ renderer: { html: () => "" } });
+const QUILON_LANGS = new Set(["quilon", "ql"]);
+
+marked.use({
+  renderer: {
+    html: () => "",
+    // Returning false falls through to marked's default renderer.
+    code(token) {
+      if (!QUILON_LANGS.has(token.lang)) return false;
+      return `<pre><code class="language-quilon">${highlight(token.text)}</code></pre>`;
+    },
+  },
+});
 
 export const SITE = "https://sapir.io";
 export const AUTHOR = "Assaf Sapir";
