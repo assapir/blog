@@ -206,12 +206,6 @@
   font-feature-settings: "calt" 1, "liga" 1;
 }
 
-/* Symbol tables teach the characters you type, so don't ligate them. */
-.blog-post-content table code {
-  font-variant-ligatures: none;
-  font-feature-settings: normal;
-}
-
 /* Quilon highlighting (see js/services/quilon-highlight.js) */
 .blog-post-content .ql-comment {
   color: #8b949e;
