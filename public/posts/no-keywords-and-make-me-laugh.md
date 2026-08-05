@@ -34,10 +34,12 @@ The bindings and arrows are unremarkable once you've seen them once (`=`, `:=`, 
 | `~` | Comment | `~ a note` |
 | `<<` / `>>` | Import / export | `<< core.io` |
 | `?` `\|` | Pattern match | `v ? \| 0 => "zero" \| _ => "other"` |
+| `< >` | Block delimiters, *and* comparison | `< a b a + b >` and `a < b` |
+| `/` | Division, *and* sum-type separator | `a / b` and `Color = Red / Green` |
 
 The full set, all sixteen of them, is in [LANGUAGE.md](https://github.com/assapir/quilon/blob/main/LANGUAGE.md).
 
-Two more are genuinely hostile and I'm keeping them. `<` and `>` are block delimiters *and* comparison operators, so the parser has to work out which one you meant. And `/` is division as well as the sum-type separator:
+The last two rows are genuinely hostile and I'm keeping them. Each symbol means two unrelated things and the parser works out which from context, which is a sentence that should worry you more than it worries me. The `/` case:
 
 ```quilon
 ~ A nullary enum.
