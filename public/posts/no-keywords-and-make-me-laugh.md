@@ -75,7 +75,7 @@ It also has exactly one numeric type. `Num`. Integers and floats, all of it, one
 
 I have written a strict static type system and then handed it JavaScript's number model. There are no generics either, so a match must cover every variant but a variant's payload has to be a built-in type. The checker is pedantic about everything except the thing every other statically typed language is pedantic about first.
 
-## The bit it accidentally got right
+## The one part I actually thought about
 
 ```quilon
 greeting = "héllo" + " 🌍"
@@ -85,9 +85,11 @@ c = greeting.length   ~ grapheme count  → 7
 
 `.size` is bytes. `.length` is grapheme clusters — user-perceived characters, the thing you'd get if you counted with your finger.
 
-I'd love to claim this. I can't: Swift and Elixir got there first. But look at the company it puts me in. JavaScript counts UTF-16 code units. Python counts code points. Go and C count bytes. Rust's `.len()` is bytes, and if you want to know how many characters a human sees, you go and add the `unicode-segmentation` crate.
+This is the one decision in the language that wasn't made for a laugh. "How much memory is this" and "how many characters is this" are different questions with different answers, and giving them one name is how you end up truncating a string through the middle of an emoji. So they got two names, and the one that sounds like what a person means returns what a person means.
 
-My runtime pulls in `unicode-segmentation`. That's the joke. The toy language built on "make me laugh" ships a correct string length, and the serious one makes you install it.
+I can't claim novelty — Swift and Elixir were here first. But look at the company it puts me in. JavaScript counts UTF-16 code units. Python counts code points. Go and C count bytes. Rust's `.len()` is bytes, and to find out how many characters a human sees you go and add the `unicode-segmentation` crate.
+
+My runtime pulls in `unicode-segmentation`. The weekend language ships a correct string length; the serious one makes you install it.
 
 ## `^` is not main
 
