@@ -111,6 +111,8 @@ class SkillsSection extends HTMLElement {
         { name: "TypeScript", icon: "🔷", level: "Expert" },
         { name: "CSS3", icon: "🎨", level: "Advanced" },
         { name: "Rust", icon: "🦀", level: "Advanced" },
+        { name: "C++", icon: "⚙️", level: "Advanced" },
+        { name: "C#", icon: "🎯", level: "Intermediate" },
         { name: "Python", icon: "🐍", level: "Intermediate" },
       ],
       frameworks: [
@@ -118,10 +120,18 @@ class SkillsSection extends HTMLElement {
         { name: "Express.js", icon: "⚡", level: "Expert" },
         { name: "Web Components", icon: "🧩", level: "Advanced" },
         { name: "React", icon: "⚛️", level: "Advanced" },
+        { name: "Vue.js", icon: "💚", level: "Intermediate" },
+      ],
+      infrastructure: [
+        { name: "Kubernetes", icon: "☸️", level: "Advanced" },
+        { name: "Terraform", icon: "🏗️", level: "Advanced" },
+        { name: "Helm", icon: "⛵", level: "Advanced" },
+        { name: "Docker", icon: "🐳", level: "Advanced" },
+        { name: "CI/CD", icon: "🔁", level: "Advanced" },
       ],
       tools: [
         { name: "Linux", icon: "🐧", level: "Advanced" },
-        { name: "Docker", icon: "🐳", level: "Advanced" },
+        { name: "Git", icon: "🌿", level: "Advanced" },
       ],
       databases: [
         { name: "PostgreSQL", icon: "🐘", level: "Advanced" },
@@ -131,7 +141,6 @@ class SkillsSection extends HTMLElement {
       ],
       other: [
         { name: "REST APIs", icon: "🌐", level: "Expert" },
-        { name: "DevOps", icon: "⚙️", level: "Advanced" },
         { name: "GraphQL", icon: "🔗", level: "Intermediate" },
         { name: "WebSockets", icon: "🔌", level: "Intermediate" },
       ],
