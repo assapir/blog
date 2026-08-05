@@ -1,7 +1,8 @@
 Here is a complete Quilon program.
 
 ```quilon
-~ The entry point `^` is the program's main; its returned Num is the exit code.
+~ The entry point `^` is the program's main;
+~ its returned Num is the exit code.
 ^ = () -> Num => 42
 ```
 
@@ -71,9 +72,9 @@ I have written a strict static type system and then handed it JavaScript's numbe
 ## The bit it accidentally got right
 
 ```quilon
-greeting = "héllo" + " 🌍"   ~ + concatenates (GC-allocated)
-b = greeting.size            ~ byte length      → 11
-c = greeting.length          ~ grapheme count   → 7
+greeting = "héllo" + " 🌍"
+b = greeting.size     ~ byte length     → 11
+c = greeting.length   ~ grapheme count  → 7
 ```
 
 `.size` is bytes. `.length` is grapheme clusters — user-perceived characters, the thing you'd get if you counted with your finger.
@@ -97,7 +98,9 @@ A Rust staticlib splits those `#[no_mangle]` intrinsics across codegen units, an
 The fix is one flag:
 
 ```bash
--Wl,--whole-archive -lquilon_rt -Wl,--no-whole-archive
+-Wl,--whole-archive \
+  -lquilon_rt \
+  -Wl,--no-whole-archive
 ```
 
 Take every object, stop being clever. There's a companion horror next door: `#[link(name = "gc")]` has to sit on the actual `GC_malloc` and `GC_init` references rather than in `build.rs`, because otherwise `--as-needed` decides Boehm GC isn't needed and drops it, depending on link order. Two days of my life, both of them, spent on linker flags rather than on anything resembling language design.
