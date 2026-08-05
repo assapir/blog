@@ -30,7 +30,6 @@ The bindings and arrows are unremarkable once you've seen them once (`=`, `:=`, 
 | Symbol | Meaning | Example |
 |---|---|---|
 | `^` | Entry point | `^ = () -> Num => 0` |
-| `$` | Unit: the type *and* its only value | `f = () -> $ => $` |
 | `~` | Comment | `~ a note` |
 | `<<` / `>>` | Import / export | `<< core.io` |
 | `?` `\|` | Pattern match | `v ? \| 0 => "zero" \| _ => "other"` |
