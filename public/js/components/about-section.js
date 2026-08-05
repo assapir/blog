@@ -11,8 +11,13 @@ class AboutSection extends HTMLElement {
                         <h2>About Me</h2>
                         <p>
                             I've been writing code since 2014, which means I've had plenty of time to
-                            form opinions about things that don't matter. Mostly JavaScript and TypeScript,
-                            with the occasional Rust detour when I want to feel humble.
+                            form opinions about things that don't matter.
+                        </p>
+                        <p>
+                            Full-stack, and not in the CV sense: TypeScript and Node on the back,
+                            React and Vue on the front, C++ back when the SDKs were desktop-shaped,
+                            and Rust when I want to feel humble. Under most of it there's a Kubernetes
+                            cluster and some Terraform I have to answer for.
                         </p>
                         <p>
                             When I'm not shipping code, I'm raising 5 kids, breaking things on

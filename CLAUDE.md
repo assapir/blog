@@ -9,9 +9,10 @@ Personal website for Assaf Sapir (sapir.io), built with vanilla JavaScript Web C
 ## Commands
 
 ```bash
-npm run dev          # Local dev server (wrangler dev)
-npm run deploy       # Deploy to Cloudflare Workers
-npm run preview      # Dev server with remote Cloudflare services
+pnpm install         # Install dependencies (pnpm, not npm — pnpm-lock.yaml is the lockfile)
+pnpm dev             # Local dev server (wrangler dev)
+pnpm deploy          # Deploy to Cloudflare Workers
+pnpm preview         # Dev server with remote Cloudflare services
 ```
 
 ## Architecture

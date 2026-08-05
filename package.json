@@ -4,11 +4,11 @@
   "description": "Personal blog deployed on Cloudflare Workers",
   "main": "worker.js",
   "scripts": {
-    "deploy": "npx wrangler deploy",
-    "dev": "npx wrangler dev",
-    "preview": "npx wrangler dev --remote"
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "preview": "wrangler dev --remote"
   },
   "devDependencies": {
-    "wrangler": "^4.77.0"
+    "wrangler": "^4.118.0"
   }
 }

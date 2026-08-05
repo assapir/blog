@@ -111,6 +111,8 @@ class SkillsSection extends HTMLElement {
         { name: "TypeScript", icon: "🔷", level: "Expert" },
         { name: "CSS3", icon: "🎨", level: "Advanced" },
         { name: "Rust", icon: "🦀", level: "Advanced" },
+        { name: "C++", icon: "⚙️", level: "Advanced" },
+        { name: "C#", icon: "🎯", level: "Intermediate" },
         { name: "Python", icon: "🐍", level: "Intermediate" },
       ],
       frameworks: [
@@ -118,20 +120,25 @@ class SkillsSection extends HTMLElement {
         { name: "Express.js", icon: "⚡", level: "Expert" },
         { name: "Web Components", icon: "🧩", level: "Advanced" },
         { name: "React", icon: "⚛️", level: "Advanced" },
+        { name: "Vue.js", icon: "💚", level: "Intermediate" },
       ],
-      tools: [
-        { name: "Linux", icon: "🐧", level: "Advanced" },
+      infrastructure: [
+        { name: "Kubernetes", icon: "☸️", level: "Advanced" },
+        { name: "Terraform", icon: "🏗️", level: "Advanced" },
+        { name: "Helm", icon: "⛵", level: "Advanced" },
         { name: "Docker", icon: "🐳", level: "Advanced" },
+        { name: "CI/CD", icon: "🔁", level: "Advanced" },
+        { name: "Linux", icon: "🐧", level: "Advanced" },
       ],
       databases: [
         { name: "PostgreSQL", icon: "🐘", level: "Advanced" },
         { name: "Redis", icon: "🔴", level: "Advanced" },
         { name: "MongoDB", icon: "🍃", level: "Intermediate" },
+        { name: "CouchDB", icon: "🛋️", level: "Intermediate" },
         { name: "SQLite", icon: "💾", level: "Intermediate" },
       ],
       other: [
         { name: "REST APIs", icon: "🌐", level: "Expert" },
-        { name: "DevOps", icon: "⚙️", level: "Advanced" },
         { name: "GraphQL", icon: "🔗", level: "Intermediate" },
         { name: "WebSockets", icon: "🔌", level: "Intermediate" },
       ],
