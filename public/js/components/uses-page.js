@@ -53,7 +53,7 @@ class UsesPage extends HTMLElement {
             name: "Lenovo ThinkPad T14s Gen 2i",
             description: "Intel i7-1185G7, 32GB RAM — Linux daily driver",
           },
-          { name: "MacBook Pro M3", description: "" },
+          { name: "MacBook Pro M4", description: "" },
           {
             name: "2x Dell 27\" 2K Monitors",
             description: "Daisy-chained",
@@ -65,8 +65,8 @@ class UsesPage extends HTMLElement {
         title: "Operating Systems & Desktop",
         items: [
           { name: "Arch Linux", url: "https://archlinux.org/", description: "btw" },
-          { name: "yay", url: "https://github.com/Jguer/yay", description: "AUR helper" },
-          { name: "GNOME", url: "https://www.gnome.org/", description: "Desktop environment" },
+          { name: "paru", url: "https://github.com/Morganamilo/paru", description: "AUR helper" },
+          { name: "niri", url: "https://github.com/niri-wm/niri", description: "Scrollable-tiling Wayland compositor" },
           { name: "Firefox", url: "https://www.mozilla.org/firefox/", description: "Primary browser" },
         ],
       },
@@ -84,9 +84,6 @@ class UsesPage extends HTMLElement {
             description:
               "GitLens, Prettier, ESLint, rust-analyzer, Docker, Playwright, Pretty TS Errors, OXC",
           },
-          { name: "Cursor", url: "https://www.cursor.com/", description: "" },
-          { name: "Claude Code", url: "https://docs.anthropic.com/en/docs/claude-code", description: "CLI" },
-          { name: "GitHub Copilot", url: "https://github.com/features/copilot", description: "CLI" },
         ],
       },
       {
