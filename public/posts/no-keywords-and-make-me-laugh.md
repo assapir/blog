@@ -117,6 +117,10 @@ The fix is one flag:
 
 Take every object, stop being clever. There's a companion horror next door: `#[link(name = "gc")]` has to sit on the actual `GC_malloc` and `GC_init` references rather than in `build.rs`, because otherwise `--as-needed` decides Boehm GC isn't needed and drops it, depending on link order. Two days of my life, both of them, spent on linker flags rather than on anything resembling language design.
 
+That flag isn't free, and you can measure it. `^ = () -> Num => 42` — the whole program, one line — builds to a **6.6 MB** executable. A Rust staticlib carries the standard library with it, so the runtime archive is 23 MB before anything of mine is in it, and `--whole-archive` says take all of it rather than only the parts referenced. `strip` gets the binary down to 1.2 MB, which means most of what's left is symbols. For scale, the compiler itself is 1.9 MB — one line of Quilon produces an artifact three times the size of the thing that compiled it.
+
+Section-level garbage collection at link time would fix most of that, and I haven't done it, because right now nothing depends on the number being small and quite a lot depended on the symbol being found.
+
 ## How this actually got built
 
 I should say this plainly: I didn't type most of it. Claude wrote the bulk of the code and I reviewed it, 79 commits' worth, one pull request at a time.
@@ -128,5 +132,7 @@ That turns out to be a real way to learn a compiler, just not the one I signed u
 Version 0.9, "stable basics". No generics. No `while`. The README has a Vision section promising implicit parallelism, deep immutability and no function coloring, immediately followed by my own sentence: "Today these are direction, not delivered features." The runtime is single-threaded. I wrote a Vision section for software with one user, which is either the most or the least serious thing in this post.
 
 It compiles, it runs, and every example in the repo goes through CI on both the JIT and the native path, under clang and gcc, with matching exit codes. That's the part I'd defend.
+
+If you want to poke at it, please do. Issues and pull requests are very welcome — there's a bus factor of one here and I am the bus, so a second opinion on anything is worth more than it would be on a serious project. A star is welcome too, and I will absolutely check.
 
 [github.com/assapir/quilon](https://github.com/assapir/quilon) — GPL-2.0, needs LLVM 22 and libgc.
