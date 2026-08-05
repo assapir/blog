@@ -89,7 +89,9 @@ My runtime pulls in `unicode-segmentation`. The weekend language ships a correct
 
 ## The standard library is one file, and it's a lie
 
-`<< core.io` is the only built-in module for now. That's the entire standard library today: `print`, `eprint`, `write`, and the constants `stdout` and `stderr`. Everything else you'd import in another language is either in the language proper or isn't there at all.
+`<< core.io` is the only built-in module for now. That's the entire standard library today: `print`, `eprint`, `write`, and the constants `stdout` and `stderr`.
+
+Strings aren't in there, and that's the part I'd defend. `Text` is a primitive, like `Num` and arrays: `+` concatenates, `.size` and `.length` work, nothing to import. There was a cosmetic `core.text` module for a while and it got deleted, on the grounds that if you have to import it, it isn't built in. Records and sum types are language-level too. So the import list is short because most of the language isn't importable.
 
 Open `corelib/io.ql` and it looks like ordinary Quilon, exports and all:
 
@@ -103,8 +105,6 @@ Open `corelib/io.ql` and it looks like ordinary Quilon, exports and all:
 ```
 
 Those bodies never run. The code generator recognises a call to `print` and emits the runtime intrinsic directly, so what's in the file is a placeholder that returns unit and a `write` that claims it wrote zero bytes. It exists to give the type checker something honest to check against, and to document the surface. It is a header file wearing a hoodie.
-
-There is deliberately no `core.text`, and that's the part I'd defend. `Text` is a primitive: `+` concatenates, `.size` and `.length` work, no import. There was a cosmetic `core.text` module for a while and it got deleted, on the grounds that if you have to import it, it isn't built in.
 
 ## `^` becomes main, for now
 
