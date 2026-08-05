@@ -84,9 +84,6 @@ class UsesPage extends HTMLElement {
             description:
               "GitLens, Prettier, ESLint, rust-analyzer, Docker, Playwright, Pretty TS Errors, OXC",
           },
-          { name: "Cursor", url: "https://www.cursor.com/", description: "" },
-          { name: "Claude Code", url: "https://docs.anthropic.com/en/docs/claude-code", description: "CLI" },
-          { name: "GitHub Copilot", url: "https://github.com/features/copilot", description: "CLI" },
         ],
       },
       {
