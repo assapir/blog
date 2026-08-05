@@ -67,6 +67,8 @@ Quilon has a static type checker. It's about 100 KB of Rust, it does inference, 
 
 It also has exactly one numeric type. `Num`. Integers and floats, all of it, one type, f64 underneath.
 
+The rest fits in a sentence. `Text` is UTF-8 and built in, `Bool` is what you'd think, `$` is unit and is both the type and its only value, arrays are `[]T`, records are anonymous structs with named fields that can carry methods taking an implicit `it`, and sum types you declare yourself with `/`, of which `Result` (`Ok` / `NotOk`) is just one that ships pre-declared. That is the whole type system. No `Int`, no `Float`, no `Char`, no `Option`, no interfaces, no classes.
+
 I have written a strict static type system and then handed it JavaScript's number model. There are no generics either, so a match must cover every variant but a variant's payload has to be a built-in type. The checker is pedantic about everything except the thing every other statically typed language is pedantic about first.
 
 ## The one part I actually thought about
