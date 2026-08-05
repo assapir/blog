@@ -17,7 +17,7 @@ I gave myself two constraints on day one:
 1. No keywords.
 2. Make me laugh.
 
-The second one is not a joke about the first one. It was the actual selection criterion. Every time there was a decision to make — how do you write a comment, how do you spell "this function returns nothing", what does a sum type look like — the candidate that made me snort got picked. That's the entire design methodology. There is no third constraint about ergonomics or readability or developer experience, and it shows.
+The second one is not a joke about the first one. It was the actual selection criterion. Every time there was a decision to make — how do you write a comment, how do you spell "this function returns nothing", what does a sum type look like — the funnier option won. That's the entire design methodology. There is no third constraint about ergonomics or readability or developer experience, and it shows.
 
 What I was actually after was less funny: I wanted to know what happens between a text file and an executable. Lexer, parser, type checker, LLVM IR, object file, linker. I'd spent a decade treating that pipeline as weather. Building a small one is the only way I know to stop a thing being weather.
 
