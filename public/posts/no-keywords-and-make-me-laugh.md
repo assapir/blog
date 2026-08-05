@@ -91,9 +91,11 @@ I can't claim novelty — Swift and Elixir were here first. But look at the comp
 
 My runtime pulls in `unicode-segmentation`. The weekend language ships a correct string length; the serious one makes you install it.
 
-## `^` is not main
+## `^` becomes main, for now
 
-The operating system has opinions and none of them are funny. My compiler emits a C `main` that wraps `^`, calls `__gc_init` first, and hands the result to the loader as an exit code. You can abolish keywords in your language. You cannot abolish `main` in the ELF loader.
+My compiler emits a C `main` that wraps `^`, calls `__gc_init` first, and hands the result back as an exit code. So the language with no keywords quietly grows one at the very last step, in a language it isn't written in.
+
+I could get out of that. The kernel doesn't want `main` — it wants `_start`, and `main` is a libc convention layered on top. Emit my own `_start`, dig the arguments off the stack, call `exit` myself, and `^` would be the real entry point with nothing in between. I haven't, because the C wrapper is three lines of codegen and gives me libc's startup for free, and I'd rather spend the evening on the type checker. It's laziness with a reason, which is the good kind.
 
 Underneath, the runtime is Rust wearing a C ABI — `#[unsafe(no_mangle)] extern "C"` intrinsics, built as both a staticlib and an rlib, so the exact same symbols resolve whether you're running through the in-process LLVM JIT or a natively linked binary. Two execution paths, one set of symbols. That was the plan, anyway.
 
