@@ -89,6 +89,25 @@ I can't claim novelty. Swift and Elixir were here first. But look at the company
 
 My runtime pulls in `unicode-segmentation`. The weekend language ships a correct string length; the serious one makes you install it.
 
+## The standard library is one file, and it's a lie
+
+`<< core.io` is the only built-in module there is. That's the entire standard library: `print`, `eprint`, `write`, and the constants `stdout` and `stderr`. Everything else you'd import in another language is either in the language proper or isn't there at all.
+
+Open `corelib/io.ql` and it looks like ordinary Quilon, exports and all:
+
+```quilon
+>> stdout = 1
+>> stderr = 2
+
+>> print = x -> $ => $
+>> eprint = x -> $ => $
+>> write = (content :: Text, fd :: Num) -> Num => 0
+```
+
+Those bodies never run. The code generator recognises a call to `print` and emits the runtime intrinsic directly, so what's in the file is a placeholder that returns unit and a `write` that claims it wrote zero bytes. It exists to give the type checker something honest to check against, and to document the surface. It is a header file wearing a hoodie.
+
+There is deliberately no `core.text`, and that's the part I'd defend. `Text` is a primitive: `+` concatenates, `.size` and `.length` work, no import. There was a cosmetic `core.text` module for a while and it got deleted, on the grounds that if you have to import it, it isn't built in.
+
 ## `^` becomes main, for now
 
 My compiler emits a C `main` that wraps `^`, calls `__gc_init` first, and hands the result back as an exit code. So the language with no keywords quietly grows one at the very last step, in a language it isn't written in.
@@ -132,6 +151,8 @@ That turns out to be a real way to learn a compiler, just not the one I signed u
 Version 0.9, "stable basics". No generics. No `while`. The README has a Vision section promising implicit parallelism, deep immutability and no function coloring, immediately followed by my own sentence: "Today these are direction, not delivered features." The runtime is single-threaded. I wrote a Vision section for software with one user, which is either the most or the least serious thing in this post.
 
 It compiles, it runs, and every example in the repo goes through CI on both the JIT and the native path, under clang and gcc, with matching exit codes. That's the part I'd defend.
+
+Where it goes next is a web server. Not a framework, not a router: a program that opens a socket, blocks on nothing, and serves a request, written in a language where you never spell `async`. That's what "web-first" is supposed to mean, and it's the honest test of the no-function-coloring idea, because a language that can only compute is free to have opinions about concurrency it never has to keep. Today Quilon cannot open a socket at all. It has `print`, and `print` is compiler-lowered, so even that is a bit of a stretch.
 
 If you want to poke at it, please do. Issues and pull requests are very welcome. There's a bus factor of one here and I am the bus, so a second opinion on anything is worth more than it would be on a serious project. A star is welcome too, and I will absolutely check.
 
