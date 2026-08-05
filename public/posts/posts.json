@@ -1,9 +1,27 @@
 [
   {
+    "title": "No keywords, and make me laugh",
+    "slug": "no-keywords-and-make-me-laugh",
+    "date": "2026-08-05",
+    "description": "Why I built Quilon: a statically typed language with no keywords, one number type, and a design rule that was mostly \u201cdoes this make me snort\u201d. Plus the linker flag that cost me two days.",
+    "tags": [
+      "quilon",
+      "compilers",
+      "rust",
+      "llvm",
+      "language-design"
+    ]
+  },
+  {
     "title": "Trying the Arch Linux aarch64 effort on a Raspberry Pi 5",
     "slug": "arch-aarch64-port-rpi5",
     "date": "2026-03-25",
-    "description": "Comparing Arch Linux ARM with the unofficial aarch64 port at ports.archlinux.page — package versions, RPi 5 support gaps, and a step-by-step guide to building a bootable VM image for UTM.",
-    "tags": ["arch-linux", "raspberry-pi", "arm64", "linux"]
+    "description": "Comparing Arch Linux ARM with the unofficial aarch64 port at ports.archlinux.page \u2014 package versions, RPi 5 support gaps, and a step-by-step guide to building a bootable VM image for UTM.",
+    "tags": [
+      "arch-linux",
+      "raspberry-pi",
+      "arm64",
+      "linux"
+    ]
   }
 ]
