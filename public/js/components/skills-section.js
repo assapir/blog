@@ -134,6 +134,7 @@ class SkillsSection extends HTMLElement {
         { name: "PostgreSQL", icon: "🐘", level: "Advanced" },
         { name: "Redis", icon: "🔴", level: "Advanced" },
         { name: "MongoDB", icon: "🍃", level: "Intermediate" },
+        { name: "CouchDB", icon: "🛋️", level: "Intermediate" },
         { name: "SQLite", icon: "💾", level: "Intermediate" },
       ],
       other: [
