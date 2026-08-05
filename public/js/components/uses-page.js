@@ -66,7 +66,7 @@ class UsesPage extends HTMLElement {
         items: [
           { name: "Arch Linux", url: "https://archlinux.org/", description: "btw" },
           { name: "paru", url: "https://github.com/Morganamilo/paru", description: "AUR helper" },
-          { name: "GNOME", url: "https://www.gnome.org/", description: "Desktop environment" },
+          { name: "niri", url: "https://github.com/niri-wm/niri", description: "Scrollable-tiling Wayland compositor" },
           { name: "Firefox", url: "https://www.mozilla.org/firefox/", description: "Primary browser" },
         ],
       },
