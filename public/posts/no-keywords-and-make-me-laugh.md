@@ -99,6 +99,8 @@ I could get out of that. The kernel doesn't want `main` — it wants `_start`, a
 
 Underneath, the runtime is Rust wearing a C ABI — `#[unsafe(no_mangle)] extern "C"` intrinsics, built as both a staticlib and an rlib, so the exact same symbols resolve whether you're running through the in-process LLVM JIT or a natively linked binary. Two execution paths, one set of symbols. That was the plan, anyway.
 
+Oh — yes, there's a JIT. In a statically typed, ahead-of-time compiled, natively linked language. `quilon run` compiles your program in memory and executes it, `quilon build` hands you a binary, and nobody asked for either half of that. It exists because waiting for a linker to run before you can see whether `2 + 2` still works got old in about a day. CI runs every example down both paths and asserts the exit codes match, which is how I find out when they don't.
+
 ## The linker was the hard part
 
 The compiler was fine. Compilers are a solved problem with a large literature and a helpful LLVM. The linker nearly ended me.
