@@ -128,10 +128,7 @@ class SkillsSection extends HTMLElement {
         { name: "Helm", icon: "⛵", level: "Advanced" },
         { name: "Docker", icon: "🐳", level: "Advanced" },
         { name: "CI/CD", icon: "🔁", level: "Advanced" },
-      ],
-      tools: [
         { name: "Linux", icon: "🐧", level: "Advanced" },
-        { name: "Git", icon: "🌿", level: "Advanced" },
       ],
       databases: [
         { name: "PostgreSQL", icon: "🐘", level: "Advanced" },
