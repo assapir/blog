@@ -89,7 +89,7 @@ My runtime pulls in `unicode-segmentation`. The weekend language ships a correct
 
 ## The standard library is one file, and it's a lie
 
-`<< core.io` is the only built-in module there is. That's the entire standard library: `print`, `eprint`, `write`, and the constants `stdout` and `stderr`. Everything else you'd import in another language is either in the language proper or isn't there at all.
+`<< core.io` is the only built-in module for now. That's the entire standard library today: `print`, `eprint`, `write`, and the constants `stdout` and `stderr`. Everything else you'd import in another language is either in the language proper or isn't there at all.
 
 Open `corelib/io.ql` and it looks like ordinary Quilon, exports and all:
 
