@@ -1,9 +1,9 @@
 [
   {
-    "title": "No keywords, and make me laugh",
+    "title": "No keywords, and make me laugh: why I built Quilon",
     "slug": "no-keywords-and-make-me-laugh",
     "date": "2026-08-05",
-    "description": "Why I built Quilon: a statically typed language with no keywords, one number type, and a design rule that was mostly \u201cdoes this make me snort\u201d. Plus the linker flag that cost me two days.",
+    "description": "Why I built Quilon: a statically typed language with no keywords, one number type, and a design rule that was mostly whether it made me laugh.",
     "tags": [
       "quilon",
       "compilers",
