@@ -191,6 +191,12 @@
   font-style: italic;
 }
 
+/* Code stays left-to-right inside RTL posts */
+.blog-post-content[dir="rtl"] pre {
+  direction: ltr;
+  text-align: left;
+}
+
 .blog-post-content pre {
   background-color: var(--background-secondary);
   border: 1px solid var(--border-color);
@@ -288,7 +294,7 @@
 .blog-post-content td {
   padding: var(--space-sm) var(--space-md);
   border: 1px solid var(--border-color);
-  text-align: left;
+  text-align: start;
 }
 
 .blog-post-content th {
