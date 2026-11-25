@@ -55,6 +55,13 @@ export function renderTags(tags) {
     .join("");
 }
 
+// Hebrew posts render right-to-left; everything else inherits the page's LTR.
+function langAttrs(post) {
+  if (!post.lang) return "";
+  const dir = post.lang === "he" ? "rtl" : "ltr";
+  return ` lang="${escapeHtml(post.lang)}" dir="${dir}"`;
+}
+
 export function sortPosts(posts) {
   return [...posts].sort((a, b) => new Date(b.date) - new Date(a.date));
 }
@@ -68,7 +75,7 @@ function renderCard(post) {
   const tags = post.tags || [];
 
   return `
-      <a href="/blog/${slug}/" class="blog-card" data-title="${escapeHtml(post.title)}" data-description="${escapeHtml(post.description)}" data-tags="${escapeHtml(tags.join(","))}">
+      <a href="/blog/${slug}/" class="blog-card"${langAttrs(post)} data-title="${escapeHtml(post.title)}" data-description="${escapeHtml(post.description)}" data-tags="${escapeHtml(tags.join(","))}">
         <h2 class="blog-card-title">${escapeHtml(post.title)}</h2>
         <div class="blog-card-meta">${formatDate(post.date)}</div>
         <p class="blog-card-description">${escapeHtml(post.description)}</p>
@@ -126,12 +133,12 @@ export function renderPostBody(post, markdown) {
   return `
         <a href="/blog/" class="blog-back">&larr; Back to Blog</a>
         <article class="blog-post">
-          <header class="blog-post-header">
+          <header class="blog-post-header"${langAttrs(post)}>
             <h1>${escapeHtml(post.title)}</h1>
             <div class="blog-post-meta"><time datetime="${escapeHtml(post.date)}">${formatDate(post.date)}</time></div>
             <div class="blog-post-tags">${renderTags(post.tags)}</div>
           </header>
-          <div class="blog-post-content">
+          <div class="blog-post-content"${langAttrs(post)}>
             ${html}
           </div>
           <div class="blog-share">

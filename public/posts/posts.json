@@ -16,12 +16,92 @@
     "title": "Trying the Arch Linux aarch64 effort on a Raspberry Pi 5",
     "slug": "arch-aarch64-port-rpi5",
     "date": "2026-03-25",
-    "description": "Comparing Arch Linux ARM with the unofficial aarch64 port at ports.archlinux.page \u2014 package versions, RPi 5 support gaps, and a step-by-step guide to building a bootable VM image for UTM.",
+    "description": "Comparing Arch Linux ARM with the unofficial aarch64 port at ports.archlinux.page — package versions, RPi 5 support gaps, and a step-by-step guide to building a bootable VM image for UTM.",
     "tags": [
       "arch-linux",
       "raspberry-pi",
       "arm64",
       "linux"
     ]
+  },
+  {
+    "title": "להשתמש בכח של כמה עוגות יחד",
+    "slug": "k3s-home-cluster",
+    "date": "2021-09-16",
+    "description": "הקמת קלאסטר קוברנטיס ביתי עם k3s על רספברי פאי, בעזרת Ansible, במקום לשלם על AKS מנוהל.",
+    "tags": [
+      "Ansible",
+      "DevOps",
+      "k8s",
+      "קוברנטיס"
+    ],
+    "lang": "he"
+  },
+  {
+    "title": "להקים הכל מאפס",
+    "slug": "terraform-azure",
+    "date": "2021-07-13",
+    "description": "איך הוספתי בקאנד לתגובות לבלוג סטטי, והקמתי את כל התשתית באז'ור כקוד עם Terraform.",
+    "tags": [
+      "Terraform",
+      "DevOps",
+      "Azure"
+    ],
+    "lang": "he"
+  },
+  {
+    "title": "פונקציות או לא להיות",
+    "slug": "rust-functions-1",
+    "date": "2021-08-18",
+    "description": "פונקציות בראסט: חתימה, פרמטרים, ערכי החזרה ו־statements.",
+    "tags": [
+      "rust",
+      "ראסט"
+    ],
+    "lang": "he"
+  },
+  {
+    "title": "משתנים שאי אפשר לשנות (בערך)",
+    "slug": "rust-vars",
+    "date": "2021-08-03",
+    "description": "משתנים בראסט: הצהרה, השמה, ולמה הם immutable כברירת מחדל (ומה עושה mut).",
+    "tags": [
+      "rust",
+      "ראסט"
+    ],
+    "lang": "he"
+  },
+  {
+    "title": "בוקר טוב עולם",
+    "slug": "rust-hello-world",
+    "date": "2021-07-25",
+    "description": "התוכנית הראשונה בראסט: יצירת פרויקט עם קארגו, קומפילציה והרצה של Hello World.",
+    "tags": [
+      "rust",
+      "ראסט"
+    ],
+    "lang": "he"
+  },
+  {
+    "title": "להתקין הכל מהתחלה, כמו לנשום בפעם הראשונה",
+    "slug": "rust-setup",
+    "date": "2021-07-18",
+    "description": "התקנת סביבת הפיתוח של ראסט: rustup, הקומפיילר rustc וקארגו.",
+    "tags": [
+      "rust",
+      "ראסט"
+    ],
+    "lang": "he"
+  },
+  {
+    "title": "טעות מיליארד הדולר",
+    "slug": "rust-intro",
+    "date": "2021-07-02",
+    "description": "מצביע ה־NULL, טעות מיליארד הדולר של טוני הואר, ואיך ראסט פותרת אותה. פתיחה לסדרה על לימוד ראסט.",
+    "tags": [
+      "rust",
+      "ראסט"
+    ],
+    "lang": "he"
   }
 ]
